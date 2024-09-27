@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+        <title>Lenguajes de programación</title>
+        <link>https://www.paraninfo.es/rss</link>
+        <description>Canal sobre programación</description>
+        <language>es</language>
+        <lastBuildDate>Thu, 26 Sep 2024 12:00:00 GMT</lastBuildDate>
+
+        <item>
+            <title>Python</title>
+            <link>https://www.paraninfo.es/rss/python.html</link>
+            <description>El lenguaje Python.</description>
+            <author>fernando@paraninfo.es (Fernando Paniagua)</author>
+            <enclosure url="https://lnd.angelmelchor.pro/alumno6/Imagenes/phyton.png"   length="10283"  type="image/png"/>
+        </item>
+
+        <item>
+            <title>Java</title>
+            <link>https://www.paraninfo.es/rss/java.html</link>
+            <description>El lenguaje Java.</description>
+            <author>fernando@paraninfo.es (Fernando Paniagua)</author>
+            <enclosure url="http://lnd.angelmelchor.pro/alumno6/Imagenes/JAVA.jpg"   length="35802" type="image/jpe"/>
+        </item>
+
+        <item>
+            <title>PHP</title>
+            <link>http://www.paraninfo.es/rss/php.html</link>
+            <description>El lenguaje PHP.</description>
+            <author>fernando@paraninfo.es (Fernando Paniagua)</author>
+            <enclosure url="http://lnd.angelmelchor.pro/alumno6/Imagenes/PHP.png"  length="46384" type="image/png"/>
+        </item>
+
+    </channel>
+</rss>
