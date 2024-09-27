@@ -13,4 +13,4 @@ if operacion == "C":
 elif operacion == "D":
     pass
 else:
-    print("Error opción incorrecta, Vuelve a introducir el texto.")
+    print("Error opción incorrecta, Vuelve a introducir el texto de nuevo.")
