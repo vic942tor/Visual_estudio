@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Contactos>
+    <Contacto id="1" email="juanperez@glaim.com" telefono="+34610981688">
+        <Nombre>Juan Pérez</Nombre>
+        <Apellido>Dimínguez Guerra</Apellido>
+        <Descripcion>Amigo de la universidad, trabaja como desarrollador de software en una empresa de tecnología. Le gusta el senderismo y los videojuegos.</Descripcion>
+        <Direccion>Calle La Luna 123, Santa Cruz de Tenerife, España</Direccion>
+    </Contacto>
+    <Contacto id="2" email="mariagomez@glaim.com" telefono="+34154632584">
+        <Nombre>María Gómez</Nombre>
+        <Apellido>Fernández Díaz</Apellido>
+        <Descripcion>Compañera de trabajo, especialista en marketing digital. Apasionada por el diseño gráfico y la fotografía.</Descripcion>
+        <Direccion>Avenida Anaga 45, Santa Cruz de Tenerife, España</Direccion>
+    </Contacto>
+    <Contacto id="3" email="robertosanchez@glaim.com" telefono="+34452163987">
+        <Nombre>Roberto Sánchez</Nombre>
+        <Apellido>Díaz Martín</Apellido>
+        <Descripcion>Vecino y compañero de gimnasio, trabaja como entrenador personal. Aficionado al ciclismo y la nutrición deportiva.</Descripcion>
+        <Direccion>Calle del Castillo 78, Santa Cruz de Tenerife, España</Direccion>
+    </Contacto>
+    <Contacto id="4" email="analopez@glaim.com" telefono="+34215478652">
+        <Nombre>Ana López</Nombre>
+        <Apellido>Fernández Luís</Apellido>
+        <Descripcion>Amiga de la infancia, actualmente es médica. Disfruta viajar y leer libros de ciencia ficción en su tiempo libre.</Descripcion>
+        <Direccion>Plaza Weyler 6, Santa Cruz de Tenerife, España</Direccion>
+    </Contacto>
+    <Contacto id="5" email="carlosfernandez@glaim.com" telefono="+34123658452">
+        <Nombre>Carlos Fernández</Nombre>
+        <Apellido>Machado Guerra</Apellido>
+        <Descripcion>Familiar lejano, trabaja en el sector financiero. Aficionado a la cocina y coleccionista de vinilos de música clásica.</Descripcion>
+        <Direccion>Calle de la Noria 12, La Laguna, España</Direccion>
+    </Contacto>
+    <Contacto id="6" email="lauramartinez@glaim.com" telefono="+34458759651">
+        <Nombre>Laura Martínez</Nombre>
+        <Apellido>Guerra Hernández</Apellido>
+        <Descripcion>Antigua compañera de clase, ahora es profesora de inglés. Le encanta el cine independiente y es voluntaria en gestión de parques.</Descripcion>
+        <Direccion>Carretera General del Norte 50, La Orotava, España</Direccion>
+    </Contacto>
+</Contactos>
