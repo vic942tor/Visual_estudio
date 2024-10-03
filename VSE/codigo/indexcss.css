@@ -1,0 +1,175 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: rgb(54, 53, 53);
+}
+nav{
+    background-color: #000;
+    text-align: center;
+    color: #fff;
+    padding: 15px;
+}
+.header-video {
+   position: relative;
+}
+
+.header-video video {
+    height: 600px;
+    width: 100%;
+    object-fit: cover;
+    position: relative;
+}
+
+nav ul {
+    background-color: #000;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    padding: 0;
+}
+
+.div-logo {
+    text-align: center;
+    width: 15%;
+    border: 4px white;
+    position: absolute;
+    bottom: 520px;
+    left: 800px;
+}
+.Imagen-logo {
+    width: 110%;
+    height: 100%;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 3px;
+    position: relative;
+    bottom: 6.5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
+footer {
+    background-color: #000;
+    text-align: center;
+    color: #fff;
+    padding: 15px;
+}
+footer ul {
+    background-color: #000;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    padding: 0;   
+}   
+footer ul li a{
+    color: #fff;
+    text-decoration: none;
+    padding: 3px;
+    position: relative;
+    bottom: 6.5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
+.h1-logo {
+    font-size:  100px;
+    position: absolute;
+    left: 29%;
+    bottom: 45%;
+    color: white;
+}
+.h2-nov{
+    color: white;
+    text-align: center;
+    font-size: 60px;
+    padding-top: 3%;
+
+}
+.slider {
+    width: 1280px;
+    height: auto;
+    margin: 70px auto 0;
+    overflow: hidden;
+}
+.slider ul {
+    display: flex;
+    padding: 0;
+    width: 400%;
+    animation: slide 16s infinite alternate ease-in-out;
+}
+.slider li {
+    list-style: none;
+    width: 100%;
+}
+.slider img {
+    width: 100%;
+}
+@keyframes slide {
+    0% {margin-left: 0%;}
+    20% {margin-left: 0%;}
+
+    25% {margin-left: -100%;}
+    45% {margin-left: -100%;}
+
+    50% {margin-left: -200%;}
+    70% {margin-left: -200%;}
+
+    75% {margin-left: -300%;}
+    95% {margin-left: -300%;}
+}
+.pinfo {
+color: white;
+padding: 1%;
+font-size: 20px;
+text-align: justify;
+border: #fff 4px solid;
+}
+hr{
+    color: white;
+    height: 10px;
+}
+.presentacion{
+    position: relative;
+    text-align: center;
+} 
+.pmant{
+    color: white;
+}
+.h1mant {
+    color: white;
+}
+.amant {
+    color: #fff;
+    text-decoration: none;
+    padding: 3px;
+    position: relative;
+    bottom: 6.5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}
+.h1ac, .h2ac {
+ color: lightsalmon;
+ text-align: center;
+ padding-bottom: 2%;
+}
+
+.ac {
+    line-height: 1.6;
+    color: white;
+    text-align: center;
+}
+.fooac{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+h1 a {
+    color: #fff;
+    text-decoration: none;
+    padding: 30px;
+    position: relative;
+    bottom: 6.5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+}

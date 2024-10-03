@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Ofertas.css">
+</head>
+<body>
+    <nav>
+    <ul>
+        <li><a href="./index.html"><h2>Inicio</h2></a></li>
+        <li><a href="./Clases.html"><h2>Clases</h2></a></li>
+        <li><a href="./Noticias.html"><h2>Noticias</h2></a></li>
+        <li><a href="./acercade.html"><h2>Acerca de</h2></a></li>
+    </ul>
+    </nav>
+    <div class="producto">
+        <img src="../imagenes/Briar_1.jpg" alt="Producto 1">
+        <h2>Briar diabla callejera</h2>
+        <p>5€</p>
+        <button>Novedad</button>
+    </div>
+
+    <div class="producto">
+        <img src="../imagenes/Chogath_2.jpg" alt="Producto 2">
+        <h2>Cho´gath refinado</h2>
+        <p>5€</p>
+        <button>Novedad</button>
+    </div>
+    <div class="producto">
+        <img src="../imagenes/Chogath_23.jpg" alt="Producto 1">
+        <h2>Cho´gath alianza quebrada</h2>
+        <p>7€</p>
+        <button>Novedad</button>
+    </div>
+    <div class="producto">
+        <img src="../imagenes/Evelynn_15.jpg" alt="Producto 1">
+        <h2>Evelynn KDA</h2>
+        <p>7€</p>
+        <button>Novedad</button>
+    </div>
+    <div class="producto">
+        <img src="../imagenes/Evelynn_24.jpg" alt="Producto 1">
+        <h2>Evelynn aquelarre</h2>
+        <p>5€</p>
+        <button>Novedad</button>
+    </div>
+    <div class="producto">
+        <img src="../imagenes/Garen_3.jpg" alt="Producto 1">
+        <h2>Garen comando</h2>
+        <p>20€</p>
+        <button>Novedad</button>
+    </div>
+    <div class="producto">
+        <img src="../imagenes/Jhin_37.jpg" alt="Producto 1">
+        <h2>Jhin oscuridad cosmica</h2>
+        <p>15€</p>
+        <button>Novedad</button>
+    </div>
+    <div class="producto">
+        <img src="../imagenes/Xerath_5.jpg" alt="Producto 1">
+        <h2>Xerath estrella oscura</h2>
+        <p>6€</p>
+        <button>Novedad</button>
+    </div>
+    <div class="producto">
+        <img src="../imagenes/Yone_35.jpg" alt="Producto 1">
+        <h2>Yone sombra de tinta</h2>
+        <p>7€</p>
+        <button>Novedad</button>
+    </div>
+    <div class="producto">
+        <img src="../imagenes/Zoe_9.jpg" alt="Producto 1">
+        <h2>Zoe guardiana de las estrellas</h2>
+        <p>5€</p>
+        <button>Novedad</button>
+    </div>
+    <div class="producto">
+        <img src="../imagenes/RekSai_1.jpg" alt="Producto 1">
+        <h2>Rek´Sai máquina de guerra</h2>
+        <p>5€</p>
+        <button>Novedad</button>
+    </div>
+    <div class="producto">
+        <img src="../imagenes/Zyra_4.jpg" alt="Producto 1">
+        <h2>Zyra dracónica</h2>
+        <p>5€</p>
+        <button>Novedad</button>
+    </div>
+    <table>
+        <tr>
+            <td>
+                <select id="selectHero">
+                    <option id="cero"></option>
+                    <option id="Briar">Briar diabla callejera</option>
+                    <option id="cho">Cho´gath refinado</option>
+                    <option id="cho2">Cho´gath alianza quebrada</option>
+                    <option id="eve">Evelynn KDA</option>
+                    <option id="eve2">Evelynn aquelarre</option>
+                    <option id="garen">Garen comando</option>
+                    <option id="jhin">Jhin oscuridad cosmica</option>
+                    <option id="xer">Xerath estrella oscura</option>
+                    <option id="yone">Yone sombra de tinta</option>
+                    <option id="zoe">Zoe guardiana de las estrellas</option>
+                    <option id="rec">Rek´Sai máquina de guerra</option>
+                    <option id="zyra">Zyra dracónica</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button onclick="sumar()">Pagar</button>
+            </td>
+        </tr>
+        <script>
+            function sumar() {
+                var selectHero = document.getElementById("selectHero");
+                var selectedHero = selectHero.options[selectHero.selectedIndex].id;
+                
+                var cero = 0
+                var Zyra = 5
+                var rec = 5
+                var zoe = 5
+                var yone = 7
+                var xer = 6
+                var jhin = 15
+                var garen = 20
+                var eve2 = 5
+                var eve = 7
+                var cho2 = 7
+                var cho = 5
+                var Briar = 5
+
+                var suma;
+                switch (selectedHero) {
+                    case 'Zyra':
+                        suma = Zyra;
+                        break;
+                    case 'rec':
+                        suma = rec;
+                        break;
+                    case 'zoe':
+                        suma = zoe;
+                        break;
+                    case 'yone':
+                        suma = yone;
+                        break;
+                    case 'xer':
+                        suma = xer;
+                        break;
+                    case 'jhin':
+                        suma = jhin;
+                        break;
+                    case 'garen':
+                        suma = garen;
+                        break;
+                    case 'eve2':
+                        suma = eve2;
+                        break;
+                    case 'eve':
+                        suma = eve;
+                        break;
+                    case 'cho2':
+                        suma = cho2;
+                        break;
+                    case 'cho':
+                        suma = cho;
+                        break;
+                    case 'Briar':
+                        suma = Briar;
+                        break;
+                    default:
+                        suma = 0;
+                }
+
+                alert("El total a pagar es: "+ suma + "€" );
+            }
+        </script>
+    <footer class="fooac">
+        <p class="ac">&copy; 2023-2024 Market of Legends. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
