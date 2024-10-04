@@ -3,7 +3,7 @@
 # mayor o igual que -10. El programa deberá imprimir según el número leído el
 # patrón de figura que se muestra en el cuadro de abajo
 import time
-respuesta = int(input("Introduce un número entero: "))
+respuesta = int(input("Introduce un número: "))
 if (2 <= respuesta <= 10) or (-10 <= respuesta <= -2):
     #Con esto utilizaremos el valor absoluto para poder realizar la forma de la figura sin preocuparnos de los signos.
     numero = abs(respuesta)
@@ -18,4 +18,4 @@ if (2 <= respuesta <= 10) or (-10 <= respuesta <= -2):
             print("*" * i + " " * (2 * (numero - i)) + "*" * i)
             time.sleep(3)
 else:
-    print("Número inválido. Debe ser entre 2 y 10, o entre -2 y -10.")
+    print("Número incorrecto, por favor establezca un número válido")
