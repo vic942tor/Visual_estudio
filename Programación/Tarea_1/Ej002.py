@@ -7,9 +7,29 @@
 modo = input("Pasar a milisegundos (P) o convertir de milisegundos a dias, horas, minutos y segundos (C): ").upper()
 if modo == "P":
     tiempo = input("Establece una cantidad de días, horas, minutos y segundos para convertilos en milisegundos, solo se deben insertar números: ").split()
-    calculo = (tiempo[0]*86400000) + (tiempo[1] * 3600000) + (tiempo[2] * 60000) + (tiempo[3] * 1000)
-    print(f"{calculo} milisegundos.")
+    dias = float(tiempo[0]) * 86400000
+    horas =  float(tiempo[1]) * 3600000
+    minutos = float(tiempo[2]) * 60000
+    segundos = float(tiempo[3]) * 1000
+    cantidad = dias + horas + minutos + segundos
+    print(f"{cantidad} milisegundos.")
 elif modo == "C":
-    timepo = input("Establece una cantidad de milisegundos para convertirlos: ")
+    tipo = input("Convertir en dias (D) en horas (H) en Minutos (M) o en segundos (S): ").upper()
+    if tipo == "D":
+        cantidad = input("Establece la cantidad de milisegindos: ")
+        resultado = float(cantidad) / 86400000
+        print(f"{cantidad} de milisegundos son {resultado} días")
+    elif tipo == "H":
+        cantidad = input("Establece la cantidad de milisegindos: ")
+        resultado = float(cantidad) / 3600000
+        print(f"{cantidad} de milisegundos son {resultado} horas")
+    elif tipo == "M":
+        cantidad = input("Establece la cantidad de milisegindos: ")
+        resultado = float(cantidad) / 60000
+        print(f"{cantidad} de milisegundos son {resultado} minutos")
+    elif tipo == "S":
+        cantidad = input("Establece la cantidad de milisegindos: ")
+        resultado = float(cantidad) / 1000
+        print(f"{cantidad} de milisegundos son {resultado} segundos")
 else:
     print("Establece una opción valida")
