@@ -4,8 +4,12 @@
 # todos los datos de entrada. Deben decidir como debe ser la entrada de datos en
 # ambos casos y una vez realizados los cálculos correspondientes se debe mostrar
 # como respuesta tanto los datos originales y el resultado de la conversión.
+
+
+
 modo = input("Pasar a milisegundos (P) o convertir de milisegundos a dias, horas, minutos y segundos (C): ").upper()
 if modo == "P":
+#Establece la cantidad de dias, horas, minutos y segundos y realiza los calculos de la conversión y se lo muestra al usuario
     tiempo = input("Establece una cantidad de días, horas, minutos y segundos para convertilos en milisegundos, solo se deben insertar números: ").split()
     dias = float(tiempo[0]) * 86400000
     horas =  float(tiempo[1]) * 3600000
@@ -13,6 +17,7 @@ if modo == "P":
     segundos = float(tiempo[3]) * 1000
     cantidad = dias + horas + minutos + segundos
     print(f"{cantidad} milisegundos.")
+#Tiene una función similar a la anterior pero para convertir desde milisegundos primero realiza una pregunta para separar en dias, horas... y luego se lo muestra al usuario
 elif modo == "C":
     tipo = input("Convertir en dias (D) en horas (H) en Minutos (M) o en segundos (S): ").upper()
     if tipo == "D":

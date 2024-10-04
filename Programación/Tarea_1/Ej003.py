@@ -4,7 +4,7 @@ ALFABETO_INVERTIDO = ALFABETO[::-1]
 OPERACION_CIFRAR = "C"
 OPERACION_DESCIFRAR = "D"
 
-# Solicitar al usuario la operación, clave y mensaje
+# Solicitar al usuario la operación
 operacion = input("¿Quieres cifrar (C) o descifrar (D) un texto? ").upper()
 mensaje = input("Introduce el mensaje: ").lower()
 

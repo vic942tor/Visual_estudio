@@ -11,5 +11,5 @@ while True:
         pass
     else:
         print("valor no valido, por favor introduzca un valor valido")
-        time.sleep(2)
+        time.sleep(1)
         break
