@@ -1,5 +1,6 @@
 # Crear una "forma de cifrado" tipo César
 ALFABETO = "abcdefghijklmnñopqrstuvwxyz"
+ALFABETO_INVERTIDO = ALFABETO[::-1]
 OPERACION_CIFRAR = "C"
 OPERACION_DESCIFRAR = "D"
 
@@ -15,8 +16,7 @@ if operacion == OPERACION_CIFRAR:
         caracter = mensaje[iteracion]
         posicion = ALFABETO.find(caracter)
         if posicion != -1:
-            nva_posicion = (posicion + 28)
-            mje_resultado += ALFABETO[nva_posicion]
+            mje_resultado += ALFABETO_INVERTIDO[posicion]
         else:
             # Si el carácter no está en el alfabeto, se agrega sin cambios
             mje_resultado += caracter
@@ -27,10 +27,9 @@ elif operacion == OPERACION_DESCIFRAR:
     iteracion = 0
     while iteracion < len(mensaje):
         caracter = mensaje[iteracion]
-        posicion = ALFABETO.find(caracter)
+        posicion = ALFABETO_INVERTIDO.find(caracter)
         if posicion != -1:
-            nva_posicion = (posicion - clave) % len(ALFABETO)
-            mje_resultado += ALFABETO[nva_posicion]
+            mje_resultado += ALFABETO[posicion]
         else:
             # Si el carácter no está en el alfabeto, se agrega sin cambios
             mje_resultado += caracter
