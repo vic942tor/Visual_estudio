@@ -1,4 +1,5 @@
 #Crear un "Juego de introducir una palabra y adivinar cual es"
+# La linea 18 no se termina de ejecutar y no se por que, supuestamente cuando se utiliza una letra nueva debería ejecutarse el if bien, pero no pasa nada, ni da error ni hace nada
 
 while True:
     palabra = input("Introduzca la palabra a adivinar (mínimo 3 letras): ").strip().lower()
@@ -13,7 +14,6 @@ while intentos_restantes > 0:
     print(f"Palabra parcial: {' '.join(palabra_parcial)}")
     print(f"Intentos restantes: {intentos_restantes} - Letras usadas: '{letras_usadas}'")
     letra = input("Indique letra a jugar -> ").strip().lower()
-    letras_usadas += letra
     #En esta parte revisa lo que introducimos en input anterior para comprobar si está registrado en leras_usadas, si ya está registrado salta un mesaje para avisar al usuario y si no lo está, la registra
     if letra in letras_usadas:
         print("Ya has usado esa letra. Intenta con otra.")
