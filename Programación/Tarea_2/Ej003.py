@@ -6,38 +6,31 @@ while True:
         break
     print("La palabra debe tener un mínimo de 3 letras.")
 palabra_parcial = ['+'] * len(palabra)  
-letras_usadas = ""                     
+letras_usadas = ""                   
 intentos_restantes = 7
 while intentos_restantes > 0:
-    #Lo siguiente muestra el "Progeso que llevamoas 
-    print(f"\nPalabra parcial: {' '.join(palabra_parcial)}")
-    print(f"Intentos restantes: {intentos_restantes} - Letras usadas: '{letras_usadas}'")
+    #Lo siguiente muestra el "Progeso que llevamos" nos indica como vamos con el progreso de la palabra, los intentos que nos quedan y nos vuelve a pedir que ingresemos una nueva letra
+    print(f"Palabra parcial: {' '.join(palabra_parcial)}")
+    print(f"Intentos restantes: {intentos_restantes}  \nLetras usadas: '{letras_usadas}'")
     letra = input("Indique la letra que desea utilizar ").strip().lower()
-
-    # Verifica si la letra ya ha sido usada
+    #En esta parte revisa lo que introducimos en input anterior para comprobar si está registrado en leras_usadas, si ya está registrado salta un mesaje para avisar al usuario y si no lo está, la registra
     if letra in letras_usadas:
         print("Ya has usado esa letra. Intenta con otra.")
         continue
-
-    # Agrega la letra a la lista de letras usadas si no está repetida
     letras_usadas += letra
-
-    # Verifica si la letra está en la palabra
+    #Aquí revisa si la letra está dentro de la palabra, actualiza la palabra parcial para que una vez que se muestre el registro anterior se muestre con la nueva letra y resta un intento si es que la letra no está en la palabra
     if letra in palabra:
-        # Actualiza palabra_parcial donde la letra aparece en la palabra
         for i in range(len(palabra)):
             if palabra[i] == letra:
                 palabra_parcial[i] = letra
     else:
-        # Resta un intento si la letra no está en la palabra
         intentos_restantes -= 1
-
-    # Verifica si el jugador ha adivinado la palabra
+    #Aquí se revisa si la palabra ya está completa y en caso de que palabra_parcial sea igual que palabra imprime la palabra parcial y la palabra a adivinar y imprime un mensaje para felicitar al jugador por la victoria 
     if ''.join(palabra_parcial) == palabra:
-        print(f"\nPalabra parcial: {' '.join(palabra_parcial)}")
-        print(f"Enhorabuena, has adivinado la palabra '{palabra}'!")
+        print(f"Palabra parcial: {' '.join(palabra_parcial)}")
+        print(f"Felicidades adivinate la palara: '{palabra}'!")
         break
 
-# Mensaje final si el jugador pierde
+#Aquí revisa los intentos restantes y si los inteso son igual a 0, imprime un mensaje para avisar al jugador que perdió y muestra cual era la palabra
 if intentos_restantes == 0 and ''.join(palabra_parcial) != palabra:
-    print(f"\nEl jugador ha perdido. La palabra es: {palabra}")
+    print(f"Perdiste. \nLa palabra era: {palabra}")
