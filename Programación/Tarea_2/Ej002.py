@@ -5,6 +5,7 @@
 
 numeros_armstrong = []
 num = 0
+#Creamos un bucle donde calculamos los números de Armstrong 
 while len(numeros_armstrong) < 20:
     digitos = str(num)
     n = len(digitos)

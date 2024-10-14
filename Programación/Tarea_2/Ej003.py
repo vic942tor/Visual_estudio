@@ -1,23 +1,18 @@
-# Solicita la palabra a adivinar y verifica que tiene al menos 3 letras
+#Crear un "Juego de introducir una palabra y adivinar cual es"
+
 while True:
     palabra = input("Introduzca la palabra a adivinar (mínimo 3 letras): ").strip().lower()
     if len(palabra) >= 3:
         break
-    print("Error: la palabra debe tener al menos 3 letras.")
-
-# Inicializa las variables para el juego
-palabra_parcial = ['+'] * len(palabra)  # Crea la palabra parcial con '+'
-letras_usadas = ""                      # Cadena para almacenar letras usadas
-intentos_restantes = 7                   # Total de intentos permitidos
-
-# Bucle principal del juego
+    print("La palabra debe tener un mínimo de 3 letras.")
+palabra_parcial = ['+'] * len(palabra)  
+letras_usadas = ""                     
+intentos_restantes = 7
 while intentos_restantes > 0:
-    # Muestra el progreso actual
+    #Lo siguiente muestra el "Progeso que llevamoas 
     print(f"\nPalabra parcial: {' '.join(palabra_parcial)}")
     print(f"Intentos restantes: {intentos_restantes} - Letras usadas: '{letras_usadas}'")
-
-    # Solicita una letra al usuario
-    letra = input("Indique letra a jugar -> ").strip().lower()
+    letra = input("Indique la letra que desea utilizar ").strip().lower()
 
     # Verifica si la letra ya ha sido usada
     if letra in letras_usadas:

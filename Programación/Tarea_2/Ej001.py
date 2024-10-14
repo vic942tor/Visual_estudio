@@ -6,6 +6,7 @@
 # en blanco en la frase se deben omitir.
 
 frase = input("Introduce una frase: ")
+#Aquí lo que estamos haciendo es reemplazar los espacios en blanco a una cadena vacía 
 frase_limpia = frase.replace(" ", "").lower()
 #Con el set podemos quitar las letras repetidas de la frase ya que un conjunto no permite los duplicados
 letras_unicas = set(frase_limpia)
