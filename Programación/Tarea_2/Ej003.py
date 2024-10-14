@@ -11,14 +11,15 @@ intentos_restantes = 7
 while intentos_restantes > 0:
     #Lo siguiente muestra el "Progeso que llevamos" nos indica como vamos con el progreso de la palabra, los intentos que nos quedan y nos vuelve a pedir que ingresemos una nueva letra
     print(f"Palabra parcial: {' '.join(palabra_parcial)}")
-    print(f"Intentos restantes: {intentos_restantes}  \nLetras usadas: '{letras_usadas}'")
-    letra = input("Indique la letra que desea utilizar ").strip().lower()
+    print(f"Intentos restantes: {intentos_restantes} - Letras usadas: '{letras_usadas}'")
+    letra = input("Indique letra a jugar -> ").strip().lower()
+    letras_usadas += letra
     #En esta parte revisa lo que introducimos en input anterior para comprobar si está registrado en leras_usadas, si ya está registrado salta un mesaje para avisar al usuario y si no lo está, la registra
     if letra in letras_usadas:
         print("Ya has usado esa letra. Intenta con otra.")
         continue
     letras_usadas += letra
-    #Aquí revisa si la letra está dentro de la palabra, actualiza la palabra parcial para que una vez que se muestre el registro anterior se muestre con la nueva letra y resta un intento si es que la letra no está en la palabra
+    #Aquí revisa si la letra está dentro de la palabra, actualiza palabra_parcial para que una vez que se muestre el registro anterior se muestre con la nueva letra y resta un intento si es que la letra no está en la palabra
     if letra in palabra:
         for i in range(len(palabra)):
             if palabra[i] == letra:
