@@ -29,9 +29,10 @@ while intentos_restantes > 0:
     #Aquí se revisa si la palabra ya está completa y en caso de que palabra_parcial sea igual que palabra imprime la palabra parcial y la palabra a adivinar y imprime un mensaje para felicitar al jugador por la victoria 
     if ''.join(palabra_parcial) == palabra:
         print(f"Palabra parcial: {' '.join(palabra_parcial)}")
-        print(f"Felicidades adivinate la palara: '{palabra}'!")
+        print(f"Felicidades la palabra era: {palabra}!")
         break
 
 #Aquí revisa los intentos restantes y si los inteso son igual a 0, imprime un mensaje para avisar al jugador que perdió y muestra cual era la palabra
 if intentos_restantes == 0 and ''.join(palabra_parcial) != palabra:
+#El \n simplemente es para mejorar la salida visualmente, ya que lo único que hace es dar un salto de linea en el texto que se encuentre por delante
     print(f"Perdiste. \nLa palabra era: {palabra}")
