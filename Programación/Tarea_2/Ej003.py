@@ -14,6 +14,9 @@ while intentos_restantes > 0:
     print(f"Palabra parcial: {' '.join(palabra_parcial)}")
     print(f"Intentos restantes: {intentos_restantes} - Letras usadas: '{letras_usadas}'")
     letra = input("Indique letra a jugar -> ").strip().lower()
+    if len(letra) != 1:
+        print("Debes ingresar una sola letra.")
+        continue
     #En esta parte revisa lo que introducimos en input anterior para comprobar si está registrado en leras_usadas, si ya está registrado salta un mesaje para avisar al usuario y si no lo está, la registra
     if letra in letras_usadas:
         print("Ya has usado esa letra. Intenta con otra.")
