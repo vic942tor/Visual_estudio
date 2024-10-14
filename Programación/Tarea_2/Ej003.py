@@ -1,5 +1,5 @@
 #Crear un "Juego de introducir una palabra y adivinar cual es"
-# La linea 18 no se termina de ejecutar y no se por que, supuestamente cuando se utiliza una letra nueva debería ejecutarse el if bien, pero no pasa nada, ni da error ni hace nada
+#
 
 while True:
     palabra = input("Introduzca la palabra a adivinar (mínimo 3 letras): ").strip().lower()
