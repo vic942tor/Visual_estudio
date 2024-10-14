@@ -1,5 +1,11 @@
+# #Escribir un programa en Python que comienza pidiendo una frase o palabra al
+# usuario. Una vez leída la frase o palabra el programa deberá generar un nuevo
+# string a partir de las letras que contengan.
+# En el string construído deben aparecer todas las letras (sin repetir) que estén
+# dentro de la frase o palabra leída ordenadas de forma decreciente. Los espacios
+# en blanco en la frase se deben omitir.
 
-frase = input("Introduce una frase o palabra: ")
+frase = input("Introduce una frase: ")
 frase_limpia = frase.replace(" ", "").lower()
 #Con el set podemos quitar las letras repetidas de la frase ya que un conjunto no permite los duplicados
 letras_unicas = set(frase_limpia)
