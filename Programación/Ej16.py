@@ -6,6 +6,6 @@ if not numero.isdigit():
 else:
     for i in range(1 , 21):
         if  i % 5 != 0:
-            print(int(numero) * i , end=" ")
+            print(f"{int(numero) * i:4d}", end="")
         else:
-            print(int(numero) * i)
+            print(f"{int(numero) * i:4d}")
