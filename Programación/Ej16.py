@@ -7,6 +7,6 @@ if not numero.isdigit():
 else:
     for i in range(1 , 21):
         if  i % 5 != 0:
-            print(f"{int(numero) * i:{int(longitud)}d}", end=" ")
+            print(f"{int(numero) * i:{int(longitud + 1)}d}", end=" ")
         else:
-            print(f"{int(numero) * i:{int(longitud)}d}")
+            print(f"{int(numero) * i:{int(longitud + 1)}d}")
