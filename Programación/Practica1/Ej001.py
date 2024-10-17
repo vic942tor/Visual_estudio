@@ -45,3 +45,4 @@ def generar_contraseña():
 #Aquí estamosañadiendo la función generar_contraseña a la variable contraseña segura y luego decimos al programa que realice un print de la nueva variable que tiene como resultado la contraseña con todas las condiciones cumplidas
 contraseña_segura = generar_contraseña()
 print("La contraseña segura es:", contraseña_segura)
+print(len(contraseña_segura))
