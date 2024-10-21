@@ -11,7 +11,7 @@
 
 import string
 import random
-#Aquí definimos el siguiente codigo como generar_contraseña
+#Aquí definimos el siguiente codigo el cual es generar_contraseña
 def generar_contraseña():
     while True:
         contraseña = ""
