@@ -16,4 +16,3 @@ if bien_estructurado:
     print("El número está posicionalmente bien estructurado")
 else:
     print("El número no está posicionalmente bien estructurado")
-
