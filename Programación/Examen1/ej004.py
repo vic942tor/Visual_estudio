@@ -4,8 +4,10 @@
 # abcdefghijklmnñopqrstuvwxyz
 # Se debe tener en cuenta que además de las letras minúsculas están las
 # correspondientes mayúsculas.
+
 ALFABETO = 'abcdefghijklmnñopqrstuvwxyz'
 ACENTOS = 'áéíóú'
+#Aquí estamos diciendole al programa la equivalencia de los acentos a las vocales normales de alfabeto
 ACENTOS[0] == ALFABETO[0]
 ACENTOS[1] == ALFABETO[4]
 ACENTOS[2] == ALFABETO[8]
