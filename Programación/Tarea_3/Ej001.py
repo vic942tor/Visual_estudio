@@ -3,13 +3,16 @@
 # secuencia *fin.
 # Posteriormente se debe leer el valor de n.
 
+
 lista = []
-#Aquí creamos el bucle para crear la lista y del cual podemos salir exribiendo fin
 while True:
-    elemento = input("Ingresa un elemento (o 'fin' para terminar): ").lower()
+    elemento = input("Ingresa un elemento (o 'fin' para terminar): ").strip().lower()
     if elemento == 'fin':
         break
-    lista.append(int(elemento))
+    try:
+        lista.append(int(elemento))
+    except:
+        print("Por favor, ingresa un número válido o 'fin' para terminar.")
 n = int(input('Inserte un número entero: '))
 resultado = []
 # Recorremos cada elemento en la lista
@@ -21,7 +24,10 @@ for i in range(len(lista)):
         cuenta = lista.count(elemento)
         if cuenta > n:
             resultado.append(elemento)
-print(f'Los números que se repiten más veces que {n} son: {resultado}')
+if resultado:
+    print(f'Los números que se repiten más veces que {n} son: {resultado}')
+else:
+    print('No hay números que se repiten más veces que', n)
 
 
 
