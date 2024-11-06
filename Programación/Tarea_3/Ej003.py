@@ -13,19 +13,19 @@ for i in range(len(jugadores)):
     print (f'Introduce los número del jugador número {i+1}: ')
     while len(jugadores[i]) < 4:
         try:
-            numero_jugador = int(input('Establece un número entre 0 y 10: '))
-            if numero_jugador >= 0 and numero_jugador <= 10:
+            numero_jugador = int(input('Establece un número entre 1 y 10: '))
+            if numero_jugador > 0 and numero_jugador <= 10:
                 jugadores[i].append(numero_jugador)
             else:
-                print('Debes introducir un número entre 0 y 10')
+                print('Debes introducir un número entre 1 y 10')
         except:
             print('Debes introducir un número')
 #Aquí estamos estableciendo los número del arbitro y comprobando que son correctos
 while True:
-    A = int(input('Inserte un número comprendido entre el 0 y el 5: ' ))
-    B = int(input('Inserte un número comprendido entre el 6 y el 10: '))
     try:  
-        if A >= 0 and A <= 5 and B >= 6 and B <= 10:
+        A = int(input('Inserte un número comprendido entre el 1 y el 5: ' ))
+        B = int(input('Inserte un número comprendido entre el 6 y el 10: '))
+        if A > 0 and A <= 5 and B >= 6 and B <= 10:
             break
         else:
             print('Debes introducir un número entre los anteriormente indicados')
@@ -33,7 +33,7 @@ while True:
         print('Debes introducir un número')
 aciertos = []
 #Aquí estamos estableciendo los aciertos de los jugadores diciendo si los numeros que eligieron estan entre los elegidos por el arbitro
-for i in range(3):
+for i in range(len(jugadores)):
     cuenta = 0
     for numero in jugadores[i]:
         if A <= numero <= B:
