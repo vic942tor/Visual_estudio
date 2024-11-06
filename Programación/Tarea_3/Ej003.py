@@ -42,7 +42,7 @@ for i in range(3):
 #Aquí estamos diciendo que números estableció el arbitro y a su vez establecemos la información de los jugadores
 print(f'El arbitro a seleccionado los valores entre {A} y {B}')
 for i in range(len(jugadores)):
-    print(f'El jugador número {i+1} el cual tiene las siguientes opciones {jugadores[i]} ha tenido una cantidad de {aciertos[0]} aciertos.')
+    print(f'El jugador número {i+1} el cual tiene las siguientes opciones {jugadores[i]} ha tenido una cantidad de {aciertos[i]} aciertos.')
  #Aquí estamos calculando la media  de aciertos para luego establecerla como media aritmetica para los usuarios   
 media_de_aciertos = sum(aciertos) / len(aciertos)
 print(f'La media aritmetica de los aciertos en esta partida es de {media_de_aciertos:.2f}')
