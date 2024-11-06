@@ -1,18 +1,18 @@
 # Escriba un programa en Python para comprobar si la lista contiene tres números
 # comunes consecutivos.
 # Inicializamos una lista vacía para almacenar los elementos ingresados
+
 lista = []
 while True:
     elemento = input("Ingresa un elemento (o 'fin' para terminar): ").strip().lower()
     if elemento == 'fin':
         break
     try:
-        # Convertimos el elemento a entero y lo añadimos a la lista
         lista.append(int(elemento))
     except:
         print("Por favor, ingresa un número válido o 'fin' para terminar.")
 resultado = []
-# Recorremos la lista hasta el tercer último elemento
+# Recorremos la lista hasta el tercer último elemento teniendo en cuenta que el elemento que se esté revisando tenga
 for i in range(len(lista) - 2):
     # Verificamos si el elemento actual y los dos siguientes son iguales
     if lista[i] == lista[i + 1] == lista[i + 2]:
