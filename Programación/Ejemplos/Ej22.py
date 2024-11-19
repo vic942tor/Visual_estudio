@@ -6,23 +6,20 @@ while True:
     nombre = input('Introduzca el nombre, @ para finalizar: ')
     if nombre == '@':
          break
-    elif nombre.isnumeric():
-        print('Nombre no válido')
-        continue
-        tupla = (nombre,[])
-        for asig in ASIG:
-                while True:
-                    valor = input(f'Nota de {asig}: ')
-                    if valor.isdigit():
-                        nota = int(valor)
-                        break
-                    elif valor.upper() == 'NO':
-                        nota = valor
-                        break
-                    else:
-                        print('Nota no valida')
-                tupla[1].append(nota)
-        Alumnos.append(tupla)
+    tupla = (nombre,[])
+    for asig in ASIG:
+            while True:
+                valor = input(f'Nota de {asig}: ')
+                if valor.isdigit():
+                    nota = int(valor)
+                    break
+                elif valor.upper() == 'NO':
+                    nota = valor
+                    break
+                else:
+                    print('Nota no valida')
+            tupla[1].append(nota)
+    Alumnos.append(tupla)
 print(Alumnos)
 
                     
