@@ -35,11 +35,9 @@ while True:
             if ' ' in categoría or not categoría.strip():  
                 print('Categoría inválida. Intente nuevamente.')
                 continue
-
 #Si la categoría no existe, la crea en el diccionario.
             if categoría not in comidas:
                 comidas[categoría] = []
-
 #Solicita el nombre del plato y valida si está correcto.
             nombre = input('Ingrese el nombre del plato: ')
             if ' ' in nombre or not nombre.strip():
@@ -50,7 +48,6 @@ while True:
             if nombre in [plato['plato'] for plato in comidas[categoría]]:
                 print('El plato ya existe en esta categoría. Intente nuevamente.')
                 continue
-
 #Solicita los ingredientes del plato.
             while True:
                 ingredientes = input('Ingrese los ingredientes separados por coma y sin espacios: ').split(',')
@@ -59,7 +56,6 @@ while True:
                     print('Debe ingresar al menos un ingrediente. Intente nuevamente.')
                     continue
                 break
-
 #Agrega el plato al diccionario bajo la categoría correspondiente.
             comidas[categoría].append({'plato': nombre, 'ingredientes': ingredientes})
             print('Plato agregado exitosamente.')

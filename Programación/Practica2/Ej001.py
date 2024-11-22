@@ -90,7 +90,3 @@ for tipo, productos_tipo in productos.items():
         print(f"Descripción: {descripcion}")
         print(f"Cantidad: {cantidad:.2f}")
         print(f"Precio: {precio:.2f}€")
-
-    
-
-
