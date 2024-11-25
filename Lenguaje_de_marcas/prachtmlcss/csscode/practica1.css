@@ -24,6 +24,7 @@ body {
   
 
   .linea-numeros {
+    margin: 5px;
     display: flex;
     justify-content: space-between;
     gap: 4px;
@@ -43,13 +44,23 @@ body {
     justify-content: center;
     align-items: center;
   }
-  
+
+  .linea-mixta .item {
+    flex-grow: 1;
+    background-color: #d9534f;
+    text-align: center;
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .linea-numeros .doble {
     flex-grow: 2;
   }
   
-  
   .linea-mixta {
+    margin: 5px;
     display: flex;
     justify-content: space-between;
     gap: 4px;
@@ -59,21 +70,13 @@ body {
     box-sizing: border-box;
   }
   
-  .linea-mixta .item {
-    flex-grow: 1;
-    background-color: #d9534f;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
-  }
-  
   .linea-mixta .imagen {
     background-image: url('../imagenes/descarga.png');
-    background-size: cover; 
+    background-size: contain; 
     background-repeat: no-repeat; 
-    background-position: center; 
+    background-position: center;
+    background-color: white;
+    border: black solid 3px;
   
   }
   
