@@ -26,22 +26,21 @@ empresa02 = [
 ]
 
 CATEGORIAS = ('frío', 'verduras', 'carnes', 'panadería', 'bazar', 'despensa', 'winos', 'lácteos')
-
-# Procesar empresa01
+#Procesa el diccionario de empresa01
 for tipo_producto, descripcion, cantidad, precio in empresa01:
     tipo_producto = tipo_producto.lower()
     if tipo_producto not in productos:
         productos[tipo_producto] = {}
     encontrado = False
-    # Buscar en la categoría del producto
+#Buscar en la categoría del producto
     for codigo, detalles in productos[tipo_producto].items():
         if detalles[0].lower() == descripcion.lower():
-            # Actualizar cantidad y precio
+#Actualizar cantidad y precio
             productos[tipo_producto][codigo][1] += cantidad
             productos[tipo_producto][codigo][2] = max(precio, detalles[2])
             encontrado = True
             break
-    # Si no existe el producto, crear uno nuevo
+#Si no existe el producto, crear uno nuevo
     if not encontrado:
         while True:
             codigo_numero = input(f'Introduzca un número de código para "{descripcion}" (4 dígitos): ')
@@ -51,21 +50,21 @@ for tipo_producto, descripcion, cantidad, precio in empresa01:
         codigo = tipo_producto[0].upper() + codigo_numero
         productos[tipo_producto][codigo] = [descripcion, cantidad, precio]
 
-# Procesar empresa02
+#Procesa el diccionario de empresa02
 for descripcion, cantidad, precio in empresa02:
     encontrado = False
-    # Buscar en todas las categorías
+#Buscar en todas las categorías
     for tipo_producto, productos_tipo in productos.items():
         for codigo, detalles in productos_tipo.items():
             if detalles[0].lower() == descripcion.lower():
-                # Actualizar cantidad y precio
+#Actualizar cantidad y precio
                 detalles[1] += cantidad
                 detalles[2] = max(precio, detalles[2])
                 encontrado = True
                 break
         if encontrado:
             break
-    # Si no se encuentra el producto, crear uno nuevo
+#Si no se encuentra el producto, crear uno nuevo
     if not encontrado:
         while True:
             tipo_producto = input(f'Introduzca el tipo de producto para "{descripcion}" (opciones: {", ".join(CATEGORIAS)}): ').lower()
@@ -80,7 +79,7 @@ for descripcion, cantidad, precio in empresa02:
         codigo = tipo_producto[0].upper() + codigo_numero
         productos[tipo_producto][codigo] = [descripcion, cantidad, precio]
 
-# Mostrar los productos finales
+#Mostrar los productos finales
 print("\nProductos actualizados:")
 for tipo_producto, productos_tipo in productos.items():
     print(f"\nTipo de producto: {tipo_producto.capitalize()}")
