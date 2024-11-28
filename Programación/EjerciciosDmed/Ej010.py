@@ -8,9 +8,7 @@ diccionario = {
     'b': [4, 5],
     'c': [6, 7, 8, 9]
 }
-
 # Crear un nuevo diccionario con listas vacías como valores
 nuevo_diccionario = {clave: [] for clave in diccionario}
-
 # Mostrar el resultado
 print(nuevo_diccionario)

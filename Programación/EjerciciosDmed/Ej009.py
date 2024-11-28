@@ -14,9 +14,13 @@ peliculas = [
     ['Episode V - The Empire Strikes Back', 'May 21', 1980],
     ['Episode VI - Return of the Jedi', 'May 25', 1983]
 ]
-
-# Crear el diccionario
-diccionario = {sublista[0]: sublista[1:] for sublista in peliculas}
-
+# Inicializamos el diccionario vacío
+diccionario = {}
+# Recorremos cada sublista y asignamos al diccionario
+for sublista in peliculas:
+    clave = sublista[0]  # El primer elemento de la sublista es la clave
+    valor = sublista[1:]  # Los demás elementos son el valor asociado
+    diccionario[clave] = valor  # Asignamos la clave y el valor en el diccionario
 # Mostrar el resultado
 print(diccionario)
+
