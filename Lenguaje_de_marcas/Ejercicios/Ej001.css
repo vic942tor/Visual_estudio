@@ -1,0 +1,28 @@
+.contenedor{
+    width: 400px;
+    border: solid 4px;
+    font-size: 3em;
+    justify-content: space-around;
+}
+.contenedor>div{
+    width: 50px;
+    height: 50px;
+    background-color: cyan;
+    margin: 10px;
+}
+#I1{
+    display: flex;
+    flex-direction: row;
+}
+#I2{
+    display: flex;
+    flex-direction: column;
+}
+#I3{
+    display: flex;
+    flex-direction: row-reverse;
+}
+#I4{
+    display: flex;
+    flex-direction: Column-reverse;
+}
