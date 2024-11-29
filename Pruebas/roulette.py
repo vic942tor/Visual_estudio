@@ -10,8 +10,8 @@ def apagar_pc():
     except Exception as e:
         print(f"Error al intentar apagar el PC: {e}")
 while True:
-    numero = random.randint(1, 50)  # Número aleatorio entre 1 y 50
-    respuesta = input('Inserte un número del 1 al 50. Si lo adivinas, ganas; de lo contrario, tu equipo será apagado: ') 
+    numero = random.randint(1, 20)  # Número aleatorio entre 1 y 50
+    respuesta = input('Inserte un número del 1 al 20. Si lo adivinas, ganas; de lo contrario, tu equipo será apagado: ') 
     # Convertir la respuesta a entero para la comparación
     try:
         respuesta = int(respuesta)

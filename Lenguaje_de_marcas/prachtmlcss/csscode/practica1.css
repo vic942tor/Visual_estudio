@@ -86,4 +86,18 @@ body {
     font-size: 25%;
     text-align: center;
   }
-  
+  @mediA (min-width: 400px) and (orientation: landscape){
+    .linea-numeros .item {
+      background-color: greenyellow;
+    }
+    .linea-mixta .item{
+      background-color: greenyellow;
+    }
+    .linea-numeros{
+      flex-direction: column;
+    }
+    .linea-mixta{
+      flex-direction: column;
+    }
+
+  }
