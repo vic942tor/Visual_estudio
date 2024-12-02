@@ -1,40 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0045)https://lnd.angelmelchor.pro/aes-128-ecb.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Texto AES-128-ECB</title>
+    <script src="./Texto AES-128-ECB_files/crypto-js.min.js.descarga"></script><style type="text/css" id="operaUserStyle"></style>
     <link rel="stylesheet" href="./Ej001.css">
 </head>
 <body>
-    <h1>ORDENANDO PANTALLA</h1>
-    <div class="contenedor" id="I1">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
+    <div class="principal">
+    <div class="container">
+        <div class="mensaje">
+            <h2>Cifrado AES-128-ECB</h2>
+            <label for="key">Clave (128 bits):</label>
+            <input type="text" id="key" placeholder="Introduce la clave aquí" maxlength="32" >
+            <button onclick="generateKey()" >Generar Clave Aleatoria</button>
+
+            <label for="plaintext">Texto para cifrar:</label>
+            <textarea id="plaintext" placeholder="Introduce el texto claro aquí" ></textarea>
+
+            <label for="ciphertext-base64">Texto cifrado (Base64):</label>
+            <textarea id="ciphertext-base64" placeholder="Aquí se mostrará el texto cifrado en Base64" ></textarea>
+
+            <label for="ciphertext-hex">Texto cifrado (Hexadecimal):</label>
+            <textarea id="ciphertext-hex" placeholder="Aquí se mostrará el texto cifrado en Hexadecimal" ></textarea>
+        </div>
+        <div class="menu">
+            <h1>Menu</h1>
+            <button onclick="encrypt()" >Cifrar</button>
+            <button  onclick="decrypt()" >Descifrar</button>
+            <button onclick="convertHexToBase64()" >Hex a Base64</button>
+            <button onclick="convertBase64ToHex()" >Base64 a Hex</button>
+        </div>
     </div>
-    <div class="contenedor" id="I2">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-    </div> 
-    <div class="contenedor" id="I3">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-    </div> 
-    <div class="contenedor" id="I4">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
+    <script>
+        // Función para generar una clave aleatoria de 128 bits
+        function generateKey() {
+            const randomKey = CryptoJS.lib.WordArray.random(16).toString(CryptoJS.enc.Hex);
+            document.getElementById('key').value = randomKey;
+        }
+
+        // Función para cifrar
+        function encrypt() {
+            const key = document.getElementById('key').value;
+            const plaintext = document.getElementById('plaintext').value;
+
+            if (!key || !plaintext) {
+                alert("Por favor, introduce una clave y un texto claro.");
+                return;
+            }
+
+            // Cifrar el texto
+            const encrypted = CryptoJS.AES.encrypt(plaintext, CryptoJS.enc.Hex.parse(key), {
+                mode: CryptoJS.mode.ECB,
+                padding: CryptoJS.pad.Pkcs7
+            });
+
+            // Mostrar texto cifrado en Base64 y Hexadecimal
+            document.getElementById('ciphertext-base64').value = encrypted.toString();
+            document.getElementById('ciphertext-hex').value = encrypted.ciphertext.toString(CryptoJS.enc.Hex);
+        }
+
+        // Función para descifrar
+        function decrypt() {
+            const key = document.getElementById('key').value;
+            const ciphertextBase64 = document.getElementById('ciphertext-base64').value;
+
+            if (!key || !ciphertextBase64) {
+                alert("Por favor, introduce una clave y un texto cifrado.");
+                return;
+            }
+
+            try {
+                // Descifrar el texto
+                const decrypted = CryptoJS.AES.decrypt(ciphertextBase64, CryptoJS.enc.Hex.parse(key), {
+                    mode: CryptoJS.mode.ECB,
+                    padding: CryptoJS.pad.Pkcs7
+                });
+
+                document.getElementById('plaintext').value = decrypted.toString(CryptoJS.enc.Utf8);
+            } catch (e) {
+                alert("Error al descifrar. Verifica la clave y el texto cifrado.");
+            }
+        }
+
+        // Función para convertir de Hex a Base64
+        function convertHexToBase64() {
+            const hexText = document.getElementById('ciphertext-hex').value;
+            if (!hexText) {
+                alert("Por favor, introduce un texto en Hexadecimal.");
+                return;
+            }
+
+            try {
+                const wordArray = CryptoJS.enc.Hex.parse(hexText);
+                const base64Text = CryptoJS.enc.Base64.stringify(wordArray);
+                document.getElementById('ciphertext-base64').value = base64Text;
+            } catch (e) {
+                alert("Error al convertir Hex a Base64.");
+            }
+        }
+
+        // Función para convertir de Base64 a Hex
+        function convertBase64ToHex() {
+            const base64Text = document.getElementById('ciphertext-base64').value;
+            if (!base64Text) {
+                alert("Por favor, introduce un texto en Base64.");
+                return;
+            }
+
+            try {
+                const wordArray = CryptoJS.enc.Base64.parse(base64Text);
+                const hexText = CryptoJS.enc.Hex.stringify(wordArray);
+                document.getElementById('ciphertext-hex').value = hexText;
+            } catch (e) {
+                alert("Error al convertir Base64 a Hex.");
+            }
+        }
+    </script>
     </div>
-</body>
-</html>
+</body></html>

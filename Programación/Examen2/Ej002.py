@@ -1,8 +1,8 @@
 # Dado un historial de compras de clientes representado como un diccionario:
 # compras = {
-#  "Juan": ["manzanas", "plátanos", "café"],
-#  "Ana": ["café", "leche", "pan"],
-#  "Luis": ["manzanas", "café", "pan"]
+#  'Juan': ['manzanas', 'plátanos', 'café'],
+#  'Ana': ['café', 'leche', 'pan'],
+#  'Luis': ['manzanas', 'café', 'pan']
 # }
 # Pregunta 01: (1,0 puntos)
 # Escribe un programa en Python que genere una lista de nombre
@@ -16,27 +16,24 @@
 # El valor una lista de productos que vende en exclusividad.
 
 compras = {
- "Juan": ["manzanas", "plátanos", "café"],
- "Ana": ["café", "leche", "pan"],
- "Luis": ["manzanas", "café", "pan"]
+ 'Juan': ['manzanas', 'plátanos', 'café'],
+ 'Ana': ['café', 'leche', 'pan'],
+ 'Luis': ['manzanas', 'café', 'pan']
 }
 #Aquí estamos comprobando los productos repetidos en todos los clientes seleccionando la lista mediante la Key del diccionario
 compra_comun = set(compras[list(compras.keys())[0]])
 for compras1 in compras.values():
-#mant solo los elementos que están en ambos conjuntos
         compra_comun &= set(compras1)  
-print(f"El producto comprado por todos es: {compra_comun}")
-
+print(f'El producto comprado por todos es: {compra_comun}')
 #Creamos un set con todos los productos comprados por cada persona
 productos_comprados = {persona: set(productos) for persona, productos in compras.items()}
-
 # Calcular los productos exclusivos de cada comprador
-for comprador, productos_otros in productos_comprados.items():
-    productos_exclusivos = productos_otros.copy()  
+for comprador, productos_general in productos_comprados.items():
+    productos_exclusivos = productos_general.copy()  
     for otro_comprador, productos in productos_comprados.items():
         if comprador != otro_comprador:
             productos_exclusivos -= productos 
-    print(f"Producto exclusivo de {comprador}: {productos_exclusivos}")
+    print(f'Producto exclusivo de {comprador}: {productos_exclusivos}')
 
 
 

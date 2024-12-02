@@ -1,28 +1,129 @@
-.contenedor{
-    width: 400px;
-    border: solid 4px;
-    font-size: 3em;
-    justify-content: space-around;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.contenedor>div{
-    width: 50px;
-    height: 50px;
-    background-color: cyan;
-    margin: 10px;
-}
-#I1{
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0e1726, #284363);
+    color: white;
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 10px;
 }
-#I2{
+
+.principal {
+    max-width: 900px;
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+h2, h1 {
+    font-size: 24px;
+    color: #0e1726;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.mensaje, .menu {
+    background: #caf0f8;
+    color: #0e1726;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mensaje {
+    flex: 3 1 60%;
+}
+
+.menu {
+    flex: 1 1 30%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
-#I3{
-    display: flex;
-    flex-direction: row-reverse;
+
+textarea, input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #0077b6;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    resize: none;
 }
-#I4{
-    display: flex;
-    flex-direction: Column-reverse;
+
+textarea::placeholder,
+input::placeholder {
+    color: #aaa;
+    font-style: italic;
 }
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #0077b6;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #023e8a;
+    transform: scale(1.05);
+}
+
+.menu button {
+    width: 80%;
+}
+
+textarea[disabled] {
+    background: #e9ecef;
+    color: #495057;
+}
+
+/* Diseño responsivo */
+@media (max-width: 1000px) {
+    .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .menu{
+        order: -1;
+    }
+
+    .mensaje, .menu {
+        flex: 1 1 100%; 
+        display: inline-block;
+        
+    }
+    .menu button {
+        width:auto !important
+    }
+    button{
+        color: #33ff33; 
+    }
+    .menu  h2{
+        display: none;
+    }
+}
+
+

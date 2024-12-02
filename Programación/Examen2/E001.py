@@ -12,14 +12,14 @@
 
 lista1 = [1,2,3,3,2,1]
 lista2 = [7,6,5,7,6]
-capicua_usuario = input(f"Ingresa una lista de números separados por comas (ejemplos: {lista1} o {lista2}): ")
+capicua_usuario = input(f'Ingresa una lista de números separados por comas (ejemplos: {lista1} o {lista2}): ')
 #Convertimos la capicua_usuario en una lista de enteros.
 lista = []
 try:
     for num in capicua_usuario.split(','):
         lista.append(int(num))
 except:
-    print("La lista ingresada no es válida.")
+    print('La lista ingresada no es válida.')
 #Iniciamos dando por hecho que suma_capicua va a ser true, y luego haremos los cambios para verificarlo
 suma_capicua = True
 #Verificamos si la longitud de la lista es impar para luego aplicarle las configuraciones necesarias
@@ -38,9 +38,9 @@ if sorted(izquierda) != sorted(derecha):
 if sum(izquierda) != sum(derecha):
     suma_capicua = False
 if suma_capicua == True:
-    print(f"La lista {capicua_usuario} es suma-capicúa.")
+    print(f'La lista {capicua_usuario} es suma-capicúa.')
 else:
-    print(f"La lista {capicua_usuario} no es suma-capicúa.")
+    print(f'La lista {capicua_usuario} no es suma-capicúa.')
 
 
 
