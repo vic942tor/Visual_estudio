@@ -1,36 +1,37 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)https://lnd.angelmelchor.pro/aes-128-ecb.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Texto AES-128-ECB</title>
-    <script src="./Texto AES-128-ECB_files/crypto-js.min.js.descarga"></script><style type="text/css" id="operaUserStyle"></style>
     <link rel="stylesheet" href="./Ej001.css">
+    <script src="crypto-js.min.js"></script>
 </head>
 <body>
     <div class="principal">
-    <div class="container">
-        <div class="mensaje">
-            <h2>Cifrado AES-128-ECB</h2>
-            <label for="key">Clave (128 bits):</label>
-            <input type="text" id="key" placeholder="Introduce la clave aquí" maxlength="32" >
-            <button onclick="generateKey()" >Generar Clave Aleatoria</button>
+        <div class="container">
+            <div class="mensaje">
+                <h2>Cifrado AES-128-ECB</h2>
+                <label for="key">Clave (128 bits):</label>
+                <input type="text" id="key" placeholder="Introduce la clave aquí" maxlength="32">
+                <button onclick="generateKey()">Generar Clave Aleatoria</button>
 
-            <label for="plaintext">Texto para cifrar:</label>
-            <textarea id="plaintext" placeholder="Introduce el texto claro aquí" ></textarea>
+                <label for="plaintext">Texto para cifrar:</label>
+                <textarea id="plaintext" placeholder="Introduce el texto claro aquí"></textarea>
 
-            <label for="ciphertext-base64">Texto cifrado (Base64):</label>
-            <textarea id="ciphertext-base64" placeholder="Aquí se mostrará el texto cifrado en Base64" ></textarea>
+                <label for="ciphertext-base64">Texto cifrado (Base64):</label>
+                <textarea id="ciphertext-base64" placeholder="Aquí se mostrará el texto cifrado en Base64"></textarea>
 
-            <label for="ciphertext-hex">Texto cifrado (Hexadecimal):</label>
-            <textarea id="ciphertext-hex" placeholder="Aquí se mostrará el texto cifrado en Hexadecimal" ></textarea>
-        </div>
-        <div class="menu">
-            <h1>Menu</h1>
-            <button onclick="encrypt()" >Cifrar</button>
-            <button  onclick="decrypt()" >Descifrar</button>
-            <button onclick="convertHexToBase64()" >Hex a Base64</button>
-            <button onclick="convertBase64ToHex()" >Base64 a Hex</button>
+                <label for="ciphertext-hex">Texto cifrado (Hexadecimal):</label>
+                <textarea id="ciphertext-hex" placeholder="Aquí se mostrará el texto cifrado en Hexadecimal"></textarea>
+            </div>
+            <div class="menu">
+                <h2>Menu</h2>
+                <button onclick="encrypt()">Cifrar</button>
+                <button onclick="decrypt()">Descifrar</button>
+                <button onclick="convertHexToBase64()">Hex a Base64</button>
+                <button onclick="convertBase64ToHex()">Base64 a Hex</button>
+            </div>
         </div>
     </div>
     <script>
@@ -118,5 +119,5 @@
             }
         }
     </script>
-    </div>
-</body></html>
+</body>
+</html>
