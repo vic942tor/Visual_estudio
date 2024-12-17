@@ -1,0 +1,15 @@
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\bin\Debug\net6.0\Ejercicio3_2.exe
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\bin\Debug\net6.0\Ejercicio3_2.deps.json
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\bin\Debug\net6.0\Ejercicio3_2.runtimeconfig.json
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\bin\Debug\net6.0\Ejercicio3_2.dll
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\bin\Debug\net6.0\Ejercicio3_2.pdb
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\obj\Debug\net6.0\Ejercicio3_2.csproj.AssemblyReference.cache
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\obj\Debug\net6.0\Ejercicio3_2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\obj\Debug\net6.0\Ejercicio3_2.AssemblyInfoInputs.cache
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\obj\Debug\net6.0\Ejercicio3_2.AssemblyInfo.cs
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\obj\Debug\net6.0\Ejercicio3_2.csproj.CoreCompileInputs.cache
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\obj\Debug\net6.0\Ejercicio3_2.dll
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\obj\Debug\net6.0\refint\Ejercicio3_2.dll
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\obj\Debug\net6.0\Ejercicio3_2.pdb
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\obj\Debug\net6.0\Ejercicio3_2.genruntimeconfig.cache
+C:\Users\aleja\source\practicaIV\PracticaIV\Ejercicio3_2\obj\Debug\net6.0\ref\Ejercicio3_2.dll
