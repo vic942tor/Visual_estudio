@@ -7,19 +7,8 @@ Console.WriteLine("Introduce una frase:");
 String str = Console.ReadLine();
 int res = palabrasEnFrase(str);
 Console.WriteLine("En la frase hay este número de palabras: " + res);
-
-
 static int palabrasEnFrase(String s)
 {
-    int i = 0;
-    int r = 0;
-    while (i < s.Length)
-    {
-        if (s.ElementAt(i) == ' ')
-        {
-            r = r + 1;
-        }
-        i++;
-    }
-    return r;
+    string[] palabras = s.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+    return palabras.Length;
 }

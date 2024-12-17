@@ -2,18 +2,26 @@
  * El programa pasará de kilogramos a gramos
  * 
  */
-double kg;
-int numero = 0;
-while (numero != 0)
+double kg = 0; 
+string entrada; 
+Console.WriteLine("Introduce los kg (escribe 0 para salir):");
+while (true)
 {
+    entrada = Console.ReadLine();
 
-       Console.WriteLine("Introduce los kg");
-        kg = Double.Parse(Console.ReadLine());
-
+    if (Double.TryParse(entrada, out kg))
+    {
+        if (kg == 0)
+        {
+            Console.WriteLine("Programa finalizado.");
+            break; 
+        }
         double gramos = kg * 1000;
-       Console.WriteLine(gramos + " Grams");
-
-       Console.WriteLine("Introduce los kg");
-        kg = Double.Parse(Console.ReadLine());
-
+        Console.WriteLine(gramos + " gramos");
+        Console.WriteLine("Introduce los kg (escribe 0 para salir):");
+    }
+    else
+    {
+        Console.WriteLine("Entrada inválida. Por favor, introduce un número válido.");
+    }
 }

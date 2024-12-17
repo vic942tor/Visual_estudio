@@ -6,21 +6,35 @@
  *  Por ejemplo, alejandra y a debería devolver lejndr
  */
 
-String cadena, letra, nuevaCadena = "";
-int i, cont = 1;
-Console.WriteLine("Introduzca una cadena: ");
-cadena = Console.ReadLine();
-Console.WriteLine("Introduzca una letra: ");
-letra = Console.ReadLine();
-for (i = 0; i < cadena.Length; i++)
+using System;
+class Program
+{
+    static void Main(string[] args)
     {
-        if ((cadena.ElementAt(i) == letra.ElementAt(0)))
+        String cadena, letra, nuevaCadena = "";
+        int i, cont = 0;
+
+        Console.WriteLine("Introduzca una cadena: ");
+        cadena = Console.ReadLine();
+
+        Console.WriteLine("Introduzca una letra: ");
+        letra = Console.ReadLine();
+        if (letra.Length != 1)
         {
-            cont++;
+            Console.WriteLine("Debe introducir una sola letra.");
+            return;
         }
-        else
+        for (i = 0; i < cadena.Length; i++)
         {
-            nuevaCadena = nuevaCadena + cadena.ElementAt(i);
+            if (cadena[i] == letra[0] && cont < 3)
+            {
+                cont++; 
+            }
+            else
+            {
+                nuevaCadena += cadena[i]; 
+            }
         }
+        Console.WriteLine("Resultado: " + nuevaCadena);
+    }
 }
-Console.WriteLine(nuevaCadena);
