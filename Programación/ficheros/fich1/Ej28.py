@@ -2,10 +2,9 @@
 
 if __name__ == '__main__':
     try:
-        fichero = open(input('Introduzca la ruta del fichero que quiera comprobar: '))
-    except Exception as e:
+        fichero = open('./datos_ejemplo01.txt')
+    except:
         print('Ha ocurrido un error con la ruta seleccionada, por favor vuelva a introducirla.')
-        lista_numeros = []  # Asegurar que la variable esté definida
     else:
         total_numero = 0
         lista_numeros = []
@@ -32,9 +31,8 @@ if __name__ == '__main__':
                 break
 
         fichero.close()
-
-    print(lista_numeros)
-    print(f'En el fichero se han encontrado {len(lista_numeros)} números.')
+        print(lista_numeros)
+        print(f'En el fichero se han encontrado {len(lista_numeros)} números.')
 
 
 
