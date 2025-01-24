@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simple</title>
+    <link rel="stylesheet" href="./calc.css">
+</head>
+<body>
+    <div class="calculadora">
+        <h1>Calculadora Simple</h1>
+        <input type="number" id="numero1" placeholder="Número 1" step="any">
+        <select id="operacion">
+            <option value="sumar">+</option>
+            <option value="restar">-</option>
+            <option value="multiplicar">×</option>
+            <option value="dividir">÷</option>
+        </select>
+        <input type="number" id="numero2" placeholder="Número 2" step="any">
+        <button onclick="calcular()">Calcular</button>
+        <div id="resultado">Resultado: </div>
+    </div>
+    <script>
+        function calcular() {
+            const numero1 = parseFloat(document.getElementById('numero1').value);
+            const numero2 = parseFloat(document.getElementById('numero2').value);
+            const operacion = document.getElementById('operacion').value;
+            let resultado;
+
+            if (isNaN(numero1) || isNaN(numero2)) {
+                resultado = 'Por favor, ingrese números válidos.';
+            } else {
+                switch (operacion) {
+                    case 'sumar':
+                        resultado = numero1 + numero2;
+                        break;
+                    case 'restar':
+                        resultado = numero1 - numero2;
+                        break;
+                    case 'multiplicar':
+                        resultado = numero1 * numero2;
+                        break;
+                    case 'dividir':
+                        if (numero2 !== 0) {
+                            resultado = numero1 / numero2;
+                        } else {
+                            resultado = 'No se puede dividir entre cero.';
+                        }
+                        break;
+                    default:
+                        resultado = 'Operación no válida.';
+                }
+            }
+
+            document.getElementById('resultado').textContent = `Resultado: ${resultado}`;
+        }
+    </script>
+</body>
+</html>
