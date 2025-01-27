@@ -7,7 +7,7 @@ from Polizas import menu_polizas
 # from Recibos import menu_recibos
 # from Siniestros import menu_siniestros
 # from Liquidaciones import menu_liquidaciones
-# from Estadisticas import menu_estadisticas
+from Estadisticas import menu_estadisticas
 
 # Archivo para almacenar los datos
 FICHERO_DATOS = "correduria_data.pkl"
@@ -58,8 +58,8 @@ def main():
         #     menu_siniestros(datos)
         # elif opcion == '5':
         #     menu_liquidaciones(datos)
-        # elif opcion == '6':
-        #     menu_estadisticas(datos)
+        elif opcion == '6':
+            menu_estadisticas(datos)
         # elif opcion == '9':
         #     print("Gracias por usar el programa.")
         #     break
