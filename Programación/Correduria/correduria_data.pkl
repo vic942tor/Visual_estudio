@@ -1,0 +1,68 @@
+datos_completos = {
+    "polizas": [
+        {
+            "nro_poliza": "P001",
+            "id_tomador": "12345678A",
+            "matricula": "1234-ABC",
+            "datos_vehiculo": ("Turismo", "Toyota", "Corolla", "Combustión"),
+            "cobertura": "RC",
+            "id_conductor": ("98765432Z", "1985-06-15", "B", "2003-07-20"),
+            "estado_poliza": "Cobrada",
+            "fecha_emision": "2025-01-01",
+            "forma_pago": ("Banco", "ES7621000813610123456789"),
+        }
+    ],
+    "tomadores": [
+        {
+            "id_tomador": "12345678A",
+            "denominacion": "Juan Pérez",
+            "fecha_nacimiento": "1980-04-12",
+            "domicilio": "Calle Falsa 123, Madrid",
+            "movil_contacto": "600123456",
+            "email_contacto": "juan.perez@example.com",
+        }
+    ],
+    "recibos": [
+        {
+            "id_recibo": "R001",
+            "nro_poliza": "P001",
+            "fecha_inicio": "2025-01-01",
+            "duracion": "A",
+            "importe_cobrar": 450.0,
+            "fecha_cobro": "2025-01-10",
+            "estado_recibo": "Cobrado",
+            "importe_pagar": 400.0,
+            "estado_liquidacion": "Liquidado",
+            "fecha_liquidacion": "2025-01-20",
+        }
+    ],
+    "siniestros": [
+        {
+            "nro_siniestro": "S001",
+            "nro_poliza": "P001",
+            "descripcion": "Accidente en autopista",
+            "matricula_contrario": "5678-DEF",
+            "compañia_contrario": "Seguros XYZ",
+            "nro_poliza_contrario": "C12345",
+            "importe_pagar": 2000.0,
+            "estado_siniestro": "Pagado",
+            "fecha_abono": "2025-01-25",
+            "estado_liquidacion": "Liquidado",
+            "fecha_liquidacion": "2025-01-26",
+        }
+    ],
+    "liquidaciones": [
+        {
+            "nro_liquidacion": "L001",
+            "fecha_liquidación": "2025-01-27",
+            "estado_liquidacion": "Cerrada",
+            "importe_recibos_cobrados": 450.0,
+            "lista_recibos_liquidar": [("P001", "R001")],
+            "importe_recibos_baja": 0.0,
+            "lista_recibos_baja": [],
+            "importe_siniestros_pagados": 2000.0,
+            "lista_siniestros_liquidados": [("P001", "S001")],
+            "importe_liquidacion": (-1550.0, 0.0),
+        }
+    ],
+}

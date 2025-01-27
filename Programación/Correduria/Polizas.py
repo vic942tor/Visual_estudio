@@ -1,9 +1,7 @@
-
-"""
-Funciones para gestionar pólizas.
-Autores: [Nombre1, Nombre2]
-"""
-def menu_polizas():
+def menu_polizas(datos):
+    """
+    Función que gestiona las opciones del menú de Pólizas.
+    """
     while True:
         print("""
         Menú Pólizas:
@@ -15,14 +13,27 @@ def menu_polizas():
         opcion = input("Seleccione una opción: ")
         if opcion == '1':
             print("Crear Póliza")
-            # Llamar a función crear_poliza()
+            crear_poliza(datos)
         elif opcion == '2':
             print("Modificar Póliza")
-            # Llamar a función modificar_poliza()
+            modificar_poliza(datos)
         elif opcion == '3':
             print("Eliminar Póliza")
-            # Llamar a función eliminar_poliza()
+            eliminar_poliza(datos)
         elif opcion == '9':
             break
         else:
             print("Opción no válida.")
+
+# Ejemplo de las funciones de creación, modificación y eliminación:
+def crear_poliza(datos):
+    # Implementa la lógica para crear una póliza
+    pass
+
+def modificar_poliza(datos):
+    # Implementa la lógica para modificar una póliza
+    pass
+
+def eliminar_poliza(datos):
+    # Implementa la lógica para eliminar una póliza
+    pass
