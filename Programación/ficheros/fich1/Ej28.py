@@ -9,24 +9,24 @@ if __name__ == '__main__':
         total_numero = 0
         lista_numeros = []
         comienza_numeros = False
-        numero = ''  # Inicializar la variable fuera del bucle
+        numero = ''
 
         while True:
             caracter = fichero.read(1)
-            if caracter:  # Mientras el carácter no sea vacío
-                if caracter.isdigit():  # Es dígito
+            if caracter:
+                if caracter.isdigit():
                     if not comienza_numeros:
                         comienza_numeros = True
                         numero = caracter
                     else:
                         numero += caracter
-                else:  # No es dígito
+                else:
                     if comienza_numeros:
                         comienza_numeros = False
-                        lista_numeros.append(int(numero))  # Agregar el número como entero
+                        lista_numeros.append(int(numero))
                         numero = ''
-            else:  # Fin del archivo
-                if comienza_numeros:  # Añadir el último número si es necesario
+            else:
+                if comienza_numeros:
                     lista_numeros.append(int(numero))
                 break
 

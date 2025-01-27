@@ -4,11 +4,13 @@
 #   Joaquin;87654321X;Telde)
 #Se pide crear un programa que lea los ficheros y genere un archivo llamado trabajannombre.json con el nombre de los trabajadores que hayan trabajado tanto en tenerife como en grancanaria (tenerife.csv y grancanaria.csv)
 
-import csv
 import json
+import os
+import csv
+
 
 def leer_fichero(fichero):
-    with open(fichero, 'r') as file:
+    with open("", 'r') as file:
         reader = csv.reader(file)
 
 
