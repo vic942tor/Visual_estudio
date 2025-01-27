@@ -6,7 +6,7 @@ from Polizas import menu_polizas
 # from Tomadores import menu_tomadores
 # from Recibos import menu_recibos
 # from Siniestros import menu_siniestros
-# from Liquidaciones import menu_liquidaciones
+from Liquidaciones import menu_liquidaciones
 from Estadisticas import menu_estadisticas
 
 # Archivo para almacenar los datos
@@ -56,15 +56,15 @@ def main():
         #     menu_recibos(datos)
         # elif opcion == '4':
         #     menu_siniestros(datos)
-        # elif opcion == '5':
-        #     menu_liquidaciones(datos)
+        elif opcion == '5':
+            menu_liquidaciones(datos)
         elif opcion == '6':
             menu_estadisticas(datos)
         # elif opcion == '9':
         #     print("Gracias por usar el programa.")
         #     break
-        # else:
-        #     print("Opción no válida.")
+        else:
+            print("Opción no válida.")
 
 if __name__ == "__main__":
     main()
