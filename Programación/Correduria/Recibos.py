@@ -1,6 +1,5 @@
 # Recibos.py
 import Polizas  # Para verificar que la póliza existe
-from datetime import datetime
 
 # Lista global de recibos
 recibos = []
@@ -84,12 +83,6 @@ def modificar_recibo():
     nuevo_valor = input(f"Ingrese el nuevo valor para {campo}: ")
     if campo in ["importe_cobrar", "importe_pagar"]:
         nuevo_valor = float(nuevo_valor)
-    elif campo in ["fecha_inicio", "fecha_cobro", "fecha_liquidacion"]:
-        try:
-            nuevo_valor = datetime.strptime(nuevo_valor, "%Y-%m-%d").date()
-        except ValueError:
-            print("Formato de fecha incorrecto.")
-            return
 
     recibo[campo] = nuevo_valor
     print(f"Recibo modificado: {recibo}")
