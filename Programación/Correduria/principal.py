@@ -50,21 +50,21 @@ def main():
         opcion = input("Seleccione una opción: ")
         if opcion == '1':
             menu_polizas(datos)
-        elif opcion == '2':
-            menu_tomadores(datos)
-        elif opcion == '3':
-            menu_recibos(datos)
-        elif opcion == '4':
-            menu_siniestros(datos)
-        elif opcion == '5':
-            menu_liquidaciones(datos)
-        elif opcion == '6':
-            menu_estadisticas(datos)
-        elif opcion == '9':
-            print("Gracias por usar el programa.")
-            break
-        else:
-            print("Opción no válida.")
+        # elif opcion == '2':
+        #     menu_tomadores(datos)
+        # elif opcion == '3':
+        #     menu_recibos(datos)
+        # elif opcion == '4':
+        #     menu_siniestros(datos)
+        # elif opcion == '5':
+        #     menu_liquidaciones(datos)
+        # elif opcion == '6':
+        #     menu_estadisticas(datos)
+        # elif opcion == '9':
+        #     print("Gracias por usar el programa.")
+        #     break
+        # else:
+        #     print("Opción no válida.")
 
 if __name__ == "__main__":
     main()
