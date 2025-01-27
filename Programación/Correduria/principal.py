@@ -4,7 +4,7 @@ Módulo principal que gestiona el menú de la aplicación.
 import pickle
 from Polizas import menu_polizas
 # from Tomadores import menu_tomadores
-# from Recibos import menu_recibos
+from Recibos import menu_recibos
 # from Siniestros import menu_siniestros
 from Liquidaciones import menu_liquidaciones
 from Estadisticas import menu_estadisticas
@@ -52,8 +52,8 @@ def main():
             menu_polizas(datos)
         # elif opcion == '2':
         #     menu_tomadores(datos)
-        # elif opcion == '3':
-        #     menu_recibos(datos)
+        elif opcion == '3':
+            menu_recibos(datos)
         # elif opcion == '4':
         #     menu_siniestros(datos)
         elif opcion == '5':
