@@ -1,4 +1,3 @@
-# Polizas.py
 
 def crear_poliza(polizas, tomadores, nueva_poliza):
     """
