@@ -33,27 +33,18 @@ def crear_recibo():
         print("La póliza indicada no existe.")
         return
 
-    fecha_inicio = input("Ingrese la fecha de inicio (YYYY-MM-DD): ")
-    duracion = input("Ingrese la duración (A: Anual, S: Semestral, T: Trimestral, M: Mensual): ")
-    importe_cobrar = float(input("Ingrese el importe a cobrar: "))
-    fecha_cobro = input("Ingrese la fecha de cobro (YYYY-MM-DD): ")
-    estado_recibo = input("Ingrese el estado del recibo (Pendiente, Pendiente_banco, Cobrado, Cobrado_banco, Baja): ")
-    importe_pagar = float(input("Ingrese el importe a pagar: "))
-    estado_liquidacion = input("Ingrese el estado de liquidación (Pendiente, Liquidado): ")
-    fecha_liquidacion = input("Ingrese la fecha de liquidación (YYYY-MM-DD): ")
-
-    # Crear el recibo
+    # Solicitar y crear el nuevo recibo
     nuevo_recibo = {
         "id_recibo": id_recibo,
         "nro_poliza": nro_poliza,
-        "fecha_inicio": fecha_inicio,
-        "duracion": duracion,
-        "importe_cobrar": importe_cobrar,
-        "fecha_cobro": fecha_cobro,
-        "estado_recibo": estado_recibo,
-        "importe_pagar": importe_pagar,
-        "estado_liquidacion": estado_liquidacion,
-        "fecha_liquidacion": fecha_liquidacion
+        "fecha_inicio": input("Ingrese la fecha de inicio (YYYY-MM-DD): "),
+        "duracion": input("Ingrese la duración (A: Anual, S: Semestral, T: Trimestral, M: Mensual): "),
+        "importe_cobrar": float(input("Ingrese el importe a cobrar: ")),
+        "fecha_cobro": input("Ingrese la fecha de cobro (YYYY-MM-DD): "),
+        "estado_recibo": input("Ingrese el estado del recibo (Pendiente, Pendiente_banco, Cobrado, Cobrado_banco, Baja): "),
+        "importe_pagar": float(input("Ingrese el importe a pagar: ")),
+        "estado_liquidacion": input("Ingrese el estado de liquidación (Pendiente, Liquidado): "),
+        "fecha_liquidacion": input("Ingrese la fecha de liquidación (YYYY-MM-DD): ")
     }
 
     recibos.append(nuevo_recibo)
@@ -68,24 +59,21 @@ def modificar_recibo():
     # Buscar el recibo
     recibo = next((r for r in recibos if r['id_recibo'] == id_recibo), None)
     
-    if not recibo:
+    if recibo:
+        # Modificar los campos directamente
+        campo = input(f"Recibo actual: {recibo}\n¿Qué campo desea modificar? "
+            "(fecha_inicio, duracion, importe_cobrar, fecha_cobro, estado_recibo, importe_pagar, estado_liquidacion, fecha_liquidacion): ")
+        
+        if campo in recibo:
+            nuevo_valor = input(f"Ingrese el nuevo valor para {campo}: ")
+            if campo in ["importe_cobrar", "importe_pagar"]:
+                nuevo_valor = float(nuevo_valor)
+            recibo[campo] = nuevo_valor
+            print(f"Recibo modificado: {recibo}")
+        else:
+            print("Campo no válido.")
+    else:
         print("El recibo con ese ID no existe.")
-        return
-    
-    # Modificar campos del recibo
-    print(f"Recibo actual: {recibo}")
-    campo = input("¿Qué campo desea modificar? (fecha_inicio, duracion, importe_cobrar, fecha_cobro, estado_recibo, importe_pagar, estado_liquidacion, fecha_liquidacion): ")
-    
-    if campo not in recibo:
-        print("Campo no válido.")
-        return
-
-    nuevo_valor = input(f"Ingrese el nuevo valor para {campo}: ")
-    if campo in ["importe_cobrar", "importe_pagar"]:
-        nuevo_valor = float(nuevo_valor)
-
-    recibo[campo] = nuevo_valor
-    print(f"Recibo modificado: {recibo}")
 
 def eliminar_recibo():
     """
@@ -93,24 +81,26 @@ def eliminar_recibo():
     """
     id_recibo = input("Ingrese el ID del recibo a eliminar: ")
 
-    # Buscar el recibo
+    # Buscar y eliminar el recibo si cumple las condiciones
     recibo = next((r for r in recibos if r['id_recibo'] == id_recibo), None)
 
-    if not recibo:
-        print("El recibo con ese ID no existe.")
-        return
+    if recibo and recibo['estado_recibo'] not in ['Pendiente', 'Cobrado']:
+        recibos.remove(recibo)
+        print("Recibo eliminado con éxito.")
+    else:
+        print("No se puede eliminar el recibo o no existe.")
 
-    if recibo['estado_recibo'] in ['Pendiente', 'Cobrado']:
-        print("No se puede eliminar un recibo en estado Pendiente o Cobrado.")
-        return
-
-    recibos.remove(recibo)
-    print("Recibo eliminado con éxito.")
-
-def menu_recibos():
+def menu_recibos(datos):
     """
     Muestra el menú de opciones de los recibos y permite interactuar con las opciones.
     """
+    opciones = {
+        '1': crear_recibo,
+        '2': modificar_recibo,
+        '3': eliminar_recibo,
+        '9': lambda: None  # Regresar al menú principal
+    }
+    
     while True:
         print("""
         Menú Recibos:
@@ -120,14 +110,10 @@ def menu_recibos():
         9. Regresar al menú principal
         """)
         opcion = input("Seleccione una opción: ")
-
-        if opcion == '1':
-            crear_recibo()
-        elif opcion == '2':
-            modificar_recibo()
-        elif opcion == '3':
-            eliminar_recibo()
-        elif opcion == '9':
-            break
+        
+        if opcion in opciones:
+            if opcion == '9':
+                break
+            opciones[opcion]()
         else:
             print("Opción no válida.")
