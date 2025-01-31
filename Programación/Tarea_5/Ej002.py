@@ -18,7 +18,9 @@
 
 import csv
 import json
-ARCHIVO_CSV = "ventas.csv"
+import os
+directorio_script = os.path.dirname(os.path.abspath(__file__))
+ARCHIVO_CSV = os.path.join(directorio_script, "ventas.csv")
 ARCHIVO_JSON = "informe.json"
 def leer_csv():
     """Lee los datos del archivo CSV y los retorna como una lista de diccionarios."""

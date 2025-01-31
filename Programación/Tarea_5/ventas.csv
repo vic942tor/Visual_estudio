@@ -1,0 +1,11 @@
+fecha,producto,cantidad_vendida,precio_unitario
+2024-01-01,Manzanas,10,1.5
+2024-01-01,Platanos,5,0.8
+2024-01-02,Manzanas,7,1.5
+2024-01-02,Naranjas,12,1.2
+2024-01-03,Platanos,8,0.8
+2024-01-03,Peras,15,1.7
+2024-01-04,Manzanas,20,1.5
+2024-01-04,Naranjas,10,1.2
+2024-01-05,Platanos,10,0.8
+2024-01-05,Peras,5,1.7
