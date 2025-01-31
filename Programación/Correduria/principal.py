@@ -1,15 +1,12 @@
-"""
-Módulo principal que gestiona el menú de la aplicación.
-"""
 import pickle
 from Polizas import menu_polizas
 # from Tomadores import menu_tomadores
-from Recibos import menu_recibos
+# from Recibos import menu_recibos
 # from Siniestros import menu_siniestros
 from Liquidaciones import menu_liquidaciones
 from Estadisticas import menu_estadisticas
 
-# Archivo para almacenar los datos
+# Archivo para cargar los datos
 FICHERO_DATOS = "correduria_data.pkl"
 
 # Cargar datos desde el archivo pickle o inicializar datos vacíos
@@ -49,20 +46,41 @@ def main():
         """)
         opcion = input("Seleccione una opción: ")
         if opcion == '1':
-            menu_polizas(datos)
+            menu_polizas(
+                datos["polizas"], 
+                datos["tomadores"], 
+                datos["siniestros"], 
+                datos["recibos"],
+            )
         # elif opcion == '2':
-        #     menu_tomadores(datos)
-        elif opcion == '3':
-            menu_recibos(datos)
+        #     menu_tomadores(
+        #         datos["tomadores"], 
+        #         datos["polizas"]
+        #     )
+        # elif opcion == '3':
+        #     menu_recibos(
+        #         datos["recibos"], 
+        #         datos["polizas"]
+        #     )
         # elif opcion == '4':
-        #     menu_siniestros(datos)
+        #     menu_siniestros(
+        #         datos["siniestros"], 
+        #         datos["polizas"]
+        #     )
         elif opcion == '5':
-            menu_liquidaciones(datos)
+            menu_liquidaciones(
+                datos["recibos"], 
+                datos["siniestros"], 
+                datos["liquidaciones"]
+            )
         elif opcion == '6':
-            menu_estadisticas(datos)
-        # elif opcion == '9':
-        #     print("Gracias por usar el programa.")
-        #     break
+            menu_estadisticas(
+                datos["polizas"], 
+                datos["liquidaciones"]
+            )
+        elif opcion == '9':
+            print("Gracias por usar el programa.")
+            break
         else:
             print("Opción no válida.")
 

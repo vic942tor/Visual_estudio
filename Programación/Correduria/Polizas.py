@@ -131,7 +131,7 @@ def buscar_poliza(polizas, nro_poliza):
     return "Error: No se encontró la póliza especificada."
 
 # Función para el menú de pólizas
-def menu_polizas(polizas, tomadores, siniestros, recibos, guardar_datos):
+def menu_polizas(polizas, tomadores, siniestros, recibos):
     while True:
         print("\n--- Menú de Pólizas ---")
         print("1. Crear Póliza")
@@ -164,7 +164,6 @@ def menu_polizas(polizas, tomadores, siniestros, recibos, guardar_datos):
             }
 
             print(crear_poliza(polizas, tomadores, nueva_poliza))
-            guardar_datos()
 
         elif opcion == "2":  # Modificar póliza
             nro_poliza = input("Número de póliza a modificar: ")
@@ -177,12 +176,10 @@ def menu_polizas(polizas, tomadores, siniestros, recibos, guardar_datos):
                 nuevos_datos["estado_poliza"] = estado
 
             print(modificar_poliza(polizas, nro_poliza, nuevos_datos))
-            guardar_datos()
 
         elif opcion == "3":  # Eliminar póliza
             nro_poliza = input("Número de póliza a eliminar: ")
             print(eliminar_poliza(polizas, siniestros, recibos, nro_poliza))
-            guardar_datos()
 
         elif opcion == "4":  # Listar pólizas
             for p in listar_polizas(polizas):
