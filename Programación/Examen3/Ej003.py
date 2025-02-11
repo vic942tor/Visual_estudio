@@ -32,5 +32,6 @@ def convertirCSV2JSON(csv_filename, json_filename, categoria_filtro):
         print(f"Error: {e}")
 def main():
     convertirCSV2JSON('entrada.csv', 'salida.json', 'Electrónica')
+
 if __name__ == "__main__":
     main()
