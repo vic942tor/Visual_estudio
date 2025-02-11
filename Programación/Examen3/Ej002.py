@@ -5,7 +5,8 @@
 # Nombre comppleto: Nombre y apellido de la persona
 # Edad: un número entero que debe ser >= a 18 y < a 70
 # Estado civil: un string con valores dentro del siguiente rango (casado,divorciado,viudo,soltero)
-# contraseña: un string de longitud entre 6 y 10 caracteres que debe tener letras y números que no puede empezar por número y debe contener letras mayusculas y minusculas
+# contraseña: 
+
 # 1-- Entrar o Salir
 # debe revisar un archivo pckl para ver si el usuario está registrado, si no pide que se cree uno nuevo
 import pickle
