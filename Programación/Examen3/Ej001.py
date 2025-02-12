@@ -2,7 +2,7 @@
 #todos los números de la lista original y la otra tendrá todas las letras. Ambas listas deberán estar ordenadas de forma creciente y NO DEBEN CONTENER VALORES DUPLICADOS
 # Ejemplo:
 # lista = ['a', 1, 'z', 9, 'c', 3, 'b', 2, 'a', 3, 7, 'c', 9, 'a']
-def separar(lista):
+def separar(lista, numeros=None, letras=None):
     if numeros is None:
         numeros = set()
     if letras is None:
