@@ -1,4 +1,22 @@
-# Estadisticas.py
+import csv
+import os
+# Obtener el directorio base y construir la ruta del archivo .csv
+directorio_base = os.path.dirname(os.path.abspath(__file__))
+archivo_csv = os.path.join(directorio_base, "correduriadata.csv")
+def cargar_datos():
+    """
+    Carga los datos desde el archivo CSV y los devuelve en una lista de diccionarios.
+    Retorna:
+    - list: Lista de diccionarios con los datos cargados.
+    """
+    datos = []
+    try:
+        with open(archivo_csv, newline='', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            datos = list(reader)
+    except FileNotFoundError:
+        print(f"Error: Archivo {archivo_csv} no encontrado.")
+    return datos
 
 def mostrar_informacion_poliza(polizas, siniestros, recibos, nro_poliza):
     """
@@ -47,18 +65,21 @@ def mostrar_informacion_liquidacion(liquidaciones, nro_liquidacion):
 
     return "Error: No se encontró la liquidación especificada."
 
-def menu_estadisticas(polizas, siniestros, recibos, liquidaciones):
+def menu():
     """
     Menú principal para mostrar estadísticas.
 
-    Parámetros:
-    - polizas (list): Lista de pólizas existentes.
-    - siniestros (list): Lista de siniestros existentes.
-    - recibos (list): Lista de recibos existentes.
-    - liquidaciones (list): Lista de liquidaciones existentes.
-
     No retorna nada, solo imprime resultados en pantalla.
     """
+    # Cargar datos desde el archivo CSV
+    datos = cargar_datos()
+
+    # Separar los datos en listas de pólizas, siniestros, recibos y liquidaciones
+    polizas = [d for d in datos if 'nro_poliza' in d]
+    siniestros = [d for d in datos if 'nro_siniestro' in d]
+    recibos = [d for d in datos if 'id_recibo' in d]
+    liquidaciones = [d for d in datos if 'nro_liquidacion' in d]
+
     while True:
         print("\n--- Menú de Estadísticas ---")
         print("1. Mostrar información de una póliza")
@@ -93,3 +114,6 @@ def menu_estadisticas(polizas, siniestros, recibos, liquidaciones):
 
         else:
             print("Opción no válida.")
+
+if __name__ == "__main__":
+    menu_estadisticas()

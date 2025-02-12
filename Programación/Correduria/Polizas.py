@@ -2,13 +2,10 @@ import csv
 import os
 from Utilidades import validar_nif_nie_cif
 
-# Obtener el directorio base y construir la ruta del archivo CSV
+#Obtiene el directorio base y construir la ruta del archivo CSV
 directorio_base = os.path.dirname(os.path.abspath(__file__))
 archivo_csv = os.path.join(directorio_base, "correduriadata.csv")
-
-# Lista para almacenar las pólizas
 polizas = []
-
 def cargar_polizas():
     """Carga las pólizas desde el archivo CSV."""
     global polizas
