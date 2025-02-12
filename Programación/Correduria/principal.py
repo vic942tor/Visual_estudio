@@ -1,4 +1,5 @@
-import pickle
+import csv
+import os
 from Polizas import menu_polizas
 # from Tomadores import menu_tomadores
 # from Recibos import menu_recibos
@@ -6,35 +7,43 @@ from Polizas import menu_polizas
 from Liquidaciones import menu_liquidaciones
 from Estadisticas import menu_estadisticas
 
-# Archivo para cargar los datos
-FICHERO_DATOS = "correduria_data.pkl"
+directorio_base = os.path.dirname(os.path.abspath(__file__))
+archivo_csv = os.path.join(directorio_base, "correduriadata.csv")
 
-# Cargar datos desde el archivo pickle o inicializar datos vacíos
+# Cargar datos desde un solo archivo CSV
 def cargar_datos():
     """
-    Carga los datos desde el archivo pickle o inicializa datos vacíos.
-
+    Carga los datos desde un único archivo CSV o inicializa una lista vacía si no existe.
     Returns:
-        dict: Diccionario con los datos cargados.
+        list: Lista de diccionarios con los datos cargados.
     """
+    datos = []
     try:
-        with open(FICHERO_DATOS, "rb") as file:
-            return pickle.load(file)
-    except:
-        return {
-            "polizas": [],
-            "tomadores": [],
-            "recibos": [],
-            "siniestros": [],
-            "liquidaciones": []
-        }
+        with open(archivo_csv, newline='', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            datos = list(reader)
+    except FileNotFoundError:
+        pass
+    return datos
+
+# Función para guardar datos en un solo archivo CSV
+def guardar_datos(datos):
+    """
+    Guarda los datos en un único archivo CSV.
+    Args:
+        datos (list): Lista de diccionarios con los datos a guardar.
+    """
+    if datos:
+        with open(archivo_csv, "w", newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=datos[0].keys())
+            writer.writeheader()
+            writer.writerows(datos)
 
 def main():
     datos = cargar_datos()
     while True:
         print("""
         Correduría Mi Coche Asegurado
-
         Menú principal:
         1. Pólizas
         2. Tomadores
@@ -46,43 +55,25 @@ def main():
         """)
         opcion = input("Seleccione una opción: ")
         if opcion == '1':
-            menu_polizas(
-                datos["polizas"], 
-                datos["tomadores"], 
-                datos["siniestros"], 
-                datos["recibos"],
-            )
+            menu_polizas(datos)
         # elif opcion == '2':
-        #     menu_tomadores(
-        #         datos["tomadores"], 
-        #         datos["polizas"]
-        #     )
+        #     menu_tomadores(datos)
         # elif opcion == '3':
-        #     menu_recibos(
-        #         datos["recibos"], 
-        #         datos["polizas"]
-        #     )
+        #     menu_recibos(datos)
         # elif opcion == '4':
-        #     menu_siniestros(
-        #         datos["siniestros"], 
-        #         datos["polizas"]
-        #     )
+        #     menu_siniestros(datos)
         elif opcion == '5':
-            menu_liquidaciones(
-                datos["recibos"], 
-                datos["siniestros"], 
-                datos["liquidaciones"]
-            )
+            menu_liquidaciones(datos)
         elif opcion == '6':
-            menu_estadisticas(
-                datos["polizas"], 
-                datos["liquidaciones"]
-            )
+            menu_estadisticas(datos)
         elif opcion == '9':
-            print("Gracias por usar el programa.")
+            print("Guardando datos y saliendo...")
+            guardar_datos(datos)
             break
         else:
             print("Opción no válida.")
 
 if __name__ == "__main__":
     main()
+
+
