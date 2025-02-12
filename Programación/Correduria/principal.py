@@ -1,3 +1,6 @@
+"""
+Autores: Víctor Fernandez Díaz ~ Marcos Javier Pérez Gómez
+"""
 import Polizas
 import Tomadores
 import Recibos
@@ -8,14 +11,16 @@ import Estadisticas
 def main():
     """Muestra el menú principal y gestiona las opciones seleccionadas."""
     while True:
-        print("\nCorreduría Mi Coche Asegurado")
-        print("1. Pólizas")
-        print("2. Tomadores")
-        print("3. Recibos")
-        print("4. Siniestros")
-        print("5. Liquidaciones")
-        print("6. Estadística")
-        print("9. Salir")
+        print("""
+        Correduría Mi Coche Asegurado:
+        1. Pólizas
+        2. Tomadores
+        3. Recibos
+        4. Siniestros
+        5. Liquidaciones
+        6. Estadística
+        0. Salir del programa
+        """)
         opcion = input("Seleccione una opción: ")
 #Llamada al módulo correspondiente según la opción elegida
         if opcion == '1':
@@ -30,7 +35,7 @@ def main():
             Liquidaciones.menu()
         elif opcion == '6':
             Estadisticas.menu()
-        elif opcion == '9':
+        elif opcion == '0':
             print("Saliendo de la aplicación...")
             break
         else:

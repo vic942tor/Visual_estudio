@@ -1,16 +1,11 @@
 
 """
-Funciones auxiliares para validaciones y operaciones recurrentes.
-Autores: [Nombre1, Nombre2]
+Autores: Víctor Fernandez Díaz ~ Marcos Javier Pérez Gómez
 """
 
 def validar_nif_nie_cif(identificador):
     """
     Valida un NIF, NIE o CIF según el formato español.
-    validador:
-        identificador (str): Cadena a validar.
-    devuelve:
-        bool: True si es válido, False en caso contrario.
     """
     if len(identificador) == 9:
         if identificador[:8].isdigit() and identificador[-1].isalpha():
@@ -21,26 +16,9 @@ def validar_nif_nie_cif(identificador):
             return True
     return False
 
-def validar_cuenta_bancaria(cuenta):
-    """
-    Valida una cuenta bancaria según el formato IBAN.
-    validador:
-        cuenta (str): IBAN a validar.
-    devuelve:
-        bool: True si es válida, False en caso contrario.
-    """
-    if len(cuenta) >= 15 and cuenta[:2].isalpha() and cuenta[2:].isdigit():
-        return True
-    return False
-
 def validar_fecha(fecha, formato="%Y-%m-%d"):
     """
     Valida una fecha según un formato dado.
-    validador:
-        fecha (str): Fecha en formato de cadena.
-        formato (str): Formato esperado de la fecha (por defecto "%Y-%m-%d").
-    devuelve:
-        bool: True si la fecha es válida, False en caso contrario.
     """
     partes = fecha.split("-")
     if len(partes) == 3 and all(p.isdigit() for p in partes):
@@ -64,22 +42,9 @@ def calcular_edad(fecha_nacimiento):
     edad = hoy[0] - ano - ((hoy[1], hoy[2]) < (mes, dia))
     return edad
 
-def es_cadena_valida(cadena):
-    """
-    Verifica si una cadena no está vacía y no contiene solo espacios en blanco.
-    validador:
-        cadena (str): Cadena a validar.
-    devuelve:
-        bool: True si es válida, False en caso contrario.
-    """
-    return bool(cadena and cadena.strip())
-
 def validar_matricula(matricula: str) -> bool:
     """
     Valida una matrícula de coche en formato español.
-    
-    Retorna:
-    bool: True si la matrícula es válida, False en caso contrario.
     """    
     # Comprobar que la matrícula tiene la longitud correcta
     if len(matricula) != 7:

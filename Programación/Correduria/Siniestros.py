@@ -1,3 +1,6 @@
+"""
+Autores: Víctor Fernandez Díaz ~ Marcos Javier Pérez Gómez
+"""
 import csv
 import os
 

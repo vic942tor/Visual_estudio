@@ -1,3 +1,6 @@
+"""
+Autores: Víctor Fernandez Díaz ~ Marcos Javier Pérez Gómez
+"""
 import csv
 import os
 #Obtener el directorio base y construir la ruta del archivo .csv
@@ -19,43 +22,69 @@ def cargar_datos():
     return datos
 def mostrar_informacion_poliza(polizas, siniestros, recibos, nro_poliza):
     """
-    Muestra toda la información de una póliza específica, incluidos sus siniestros y recibos.
-    Parámetros:
-    - polizas (list): Lista de pólizas existentes.
-    - siniestros (list): Lista de siniestros existentes.
-    - recibos (list): Lista de recibos existentes.
-    - nro_poliza (str): Número de la póliza a buscar.
-    Retorna:
-    - dict/str: Diccionario con toda la información de la póliza o mensaje de error si no existe.
+    Muestra la información de una póliza específica, incluidos sus siniestros y recibos.
     """
-#Busca la póliza
+    # Busca la póliza
     for poliza in polizas:
         if poliza['nro_poliza'] == nro_poliza:
-#Obtiene los siniestros asociados
+            # Obtiene los siniestros asociados
             siniestros_asociados = [s for s in siniestros if s['nro_poliza'] == nro_poliza]
-#Obtiene los recibos asociados
+            # Obtiene los recibos asociados
             recibos_asociados = [r for r in recibos if r['nro_poliza'] == nro_poliza]
-#Retorna toda la información
-            return {
-                "Póliza": poliza,
-                "Siniestros": siniestros_asociados,
-                "Recibos": recibos_asociados,
-            }
-    return "Error: No se encontró la póliza especificada."
+            
+            # Muestra la información de la póliza
+            print("\nInformación de la Póliza:")
+            print(f"{'Número de Póliza':<20} {'Tomador':<20} {'Domicilio':<30} {'Email':<30} {'Estado':<15}")
+            print("=" * 115)
+            print(f"{poliza['nro_poliza']:<20} {poliza['nombre_tomador']:<20} {poliza['domicilio']:<30} {poliza['email_contacto']:<30} {poliza['estado_poliza']:<15}")
+            print("=" * 115)
+
+            # Muestra los siniestros asociados
+            if siniestros_asociados:
+                print("\nLista de Siniestros:")
+                print(f"{'Número de Siniestro':<20} {'Descripción':<30} {'Estado':<15} {'Importe a Pagar':<20}")
+                print("=" * 85)
+                for s in siniestros_asociados:
+                    print(f"{s['nro_siniestro']:<20} {s['descripcion']:<30} {s['estado_siniestro']:<15} {s['importe_pagar_siniestro']:<20}")
+                print("=" * 85)
+            else:
+                print("\nNo hay siniestros asociados a esta póliza.")
+
+            # Muestra los recibos asociados
+            if recibos_asociados:
+                print("\nLista de Recibos:")
+                print(f"{'ID Recibo':<15} {'Estado':<15} {'Fecha de Cobro':<20} {'Importe a Pagar':<20}")
+                print("=" * 70)
+                for r in recibos_asociados:
+                    print(f"{r['id_recibo']:<15} {r['estado_recibo']:<15} {r['fecha_cobro']:<20} {r['importe_pagar']:<20}")
+                print("=" * 70)
+            else:
+                print("\nNo hay recibos asociados a esta póliza.")
+
+            return
+
+    print("Error: No se encontró la póliza especificada.")
 def mostrar_informacion_liquidacion(liquidaciones, nro_liquidacion):
     """
-    Muestra toda la información de una liquidación específica.
-    Parámetros:
-    - liquidaciones (list): Lista de liquidaciones existentes.
-    - nro_liquidacion (str): Número de la liquidación a buscar.
-    Retorna:
-    - dict/str: Diccionario con toda la información de la liquidación o mensaje de error si no existe.
+    Muestra solo la información esencial de una liquidación específica.
     """
-#Busca la liquidación
-    for liquidacion in liquidaciones:
-        if liquidacion['nro_liquidacion'] == nro_liquidacion:
-            return liquidacion
-    return "Error: No se encontró la liquidación especificada."
+    # Buscar la liquidación por número
+    liquidacion_encontrada = next((liquidacion for liquidacion in liquidaciones 
+                                    if liquidacion['nro_liquidacion'] == nro_liquidacion), None)
+
+    if not liquidacion_encontrada:
+        print("Error: No se encontró la liquidación especificada.")
+        return
+
+    # Mostrar la información de la liquidación
+    print("\nInformación de Liquidación:")
+    print(f"{'Número de Liquidación':<25} {'Fecha':<15} {'Monto':<15} {'Estado':<15}")
+    print("=" * 70)
+    print(f"{liquidacion_encontrada['nro_liquidacion']:<25} "
+          f"{liquidacion_encontrada['fecha_liquidacion']:<15} "
+          f"{liquidacion_encontrada['importe_pagar']:<15} "
+          f"{liquidacion_encontrada['estado_liquidacion']:<15}")
+    print("=" * 70)
 def menu():
     """
     Menú principal para mostrar estadísticas.
@@ -69,10 +98,12 @@ def menu():
     recibos = [d for d in datos if 'id_recibo' in d]
     liquidaciones = [d for d in datos if 'nro_liquidacion' in d]
     while True:
-        print("\n--- Menú de Estadísticas ---")
-        print("1. Mostrar información de una póliza")
-        print("2. Mostrar información de una liquidación")
-        print("9. Volver al Menú Principal")
+        print("""
+        Menú de Estadísticas:
+        1. Mostrar información de una póliza
+        2. Mostrar información de una liquidación
+        0. Regresar al menú principal
+        """)
         opcion = input("Selecciona una opción: ")
         if opcion == "1":
             nro_poliza = input("Ingrese el número de la póliza: ")
@@ -93,10 +124,7 @@ def menu():
                     print(f"{clave}: {valor}")
             else:
                 print(resultado)
-        elif opcion == "9":
+        elif opcion == "0":
             break
         else:
             print("Opción no válida.")
-
-if __name__ == "__main__":
-    menu()

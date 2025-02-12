@@ -1,6 +1,10 @@
+"""
+Autores: Víctor Fernandez Díaz ~ Marcos Javier Pérez Gómez
+"""
 import csv
 import os
 from Utilidades import validar_nif_nie_cif 
+from Utilidades import validar_matricula
 
 #Obtiene el directorio base y construye la ruta del archivo CSV donde se almacenan las pólizas
 directorio_base = os.path.dirname(os.path.abspath(__file__))
@@ -133,8 +137,12 @@ def crear_poliza():
 #Si la póliza pertenece a un tomador existente, actualizamos la lista de pólizas
     polizas.append(poliza)
 #Guarda pólizas sin duplicar la fila del tomador
-    guardar_polizas()
-    print(f"Póliza creada y vinculada correctamente para el tomador {id_tomador}.")
+    if validar_matricula(matricula) and validar_nif_nie_cif(nif_conductor):
+        guardar_polizas()
+        print(f"Póliza creada y vinculada correctamente para el tomador {id_tomador}.")
+    else:
+        print('La matricula o el DNI son inválidos.')
+
 def modificar_poliza():
     """Permite modificar los datos de una póliza existente."""
     nro_poliza = input("Ingrese el número de póliza a modificar: ")
@@ -142,16 +150,18 @@ def modificar_poliza():
         if poliza['nro_poliza'] == nro_poliza:
             print("Póliza encontrada:", poliza)
             while True:
-                print("\nCampos disponibles para modificar:")
-                print("1. ID Tomador")
-                print("2. Matrícula")
-                print("3. Datos del Vehículo")
-                print("4. Cobertura")
-                print("5. ID Conductor")
-                print("6. Estado de la Póliza")
-                print("7. Fecha de Emisión")
-                print("8. Forma de Pago")
-                print("0. Salir")
+                print("""
+                Campos disponibles para modificar:
+                1. ID Tomador
+                2. Matrícula
+                3. Datos del Vehículo
+                4. Cobertura
+                5. ID Conductor
+                6. Estado de la Póliza
+                7. Fecha de Emisión
+                8. Forma de Pago
+                0. Regresar al menú principal
+                """)
                 opcion_modificar = input("Seleccione el campo a modificar (0 para salir): ")
                 if opcion_modificar == '1':
                     poliza['id_tomador'] = input("Ingrese el nuevo ID del tomador: ")
@@ -183,8 +193,12 @@ def modificar_poliza():
                     break
                 else:
                     print("Opción no válida. Intente de nuevo.")
-            guardar_polizas()
-            print("Póliza modificada exitosamente.")
+            if validar_matricula(poliza['matricula']):
+                guardar_polizas()
+                print("Póliza modificada exitosamente.")
+            else:
+                print('La matricula es invalida')
+
             return
     print("Póliza no encontrada.")
 def eliminar_poliza():
@@ -193,30 +207,30 @@ def eliminar_poliza():
     global polizas
     polizas = [p for p in polizas if p['nro_poliza'] != nro_poliza]
     guardar_polizas()
-    print("Póliza eliminada exitosamente.")
+    print("Póliza eliminada exitosamente.")  
 def listar_polizas():
     """Muestra todas las pólizas almacenadas."""
     if not polizas:
         print("No hay pólizas registradas.")
         return
     print("\nLista de Pólizas:")
+    print(f"{'Número de Póliza':<20} {'ID Tomador':<15} {'Matrícula':<15} {'Estado':<15} {'Fecha de Emisión':<20} {'Forma de Pago':<15}")
+    print("=" * 100)
     for poliza in polizas:
-        print(f"Número de Póliza: {poliza['nro_poliza']}, "
-              f"ID Tomador: {poliza['id_tomador']}, "
-              f"Matrícula: {poliza['matricula']}, "
-              f"Estado: {poliza['estado_poliza']}, "
-              f"Fecha de Emisión: {poliza['fecha_emision']}, "
-              f"Forma de Pago: {poliza['forma_pago']}")
+        print(f"{poliza['nro_poliza']:<20} {poliza['id_tomador']:<15} {poliza['matricula']:<15} {poliza['estado_poliza']:<15} {poliza['fecha_emision']:<20} {poliza['forma_pago']:<15}")
+    print("=" * 100)
 def menu():
     """Muestra el menú de gestión de pólizas y permite interactuar con las opciones."""
     cargar_polizas()
     while True:
-        print("\nMenú de Pólizas")
-        print("1. Crear Póliza")
-        print("2. Modificar Póliza")
-        print("3. Eliminar Póliza")
-        print("4. Listar Pólizas")
-        print("5. Regresar al menú principal")
+        print("""
+        Menú de Pólizas:
+        1. Crear Póliza
+        2. Modificar Póliza
+        3. Eliminar Póliza
+        4. Listar Pólizas
+        0. Regresar al menú principal
+        """)
         opcion = input("Seleccione una opción: ")
         if opcion == '1':
             crear_poliza()
@@ -226,7 +240,7 @@ def menu():
             eliminar_poliza()
         elif opcion == '4':
             listar_polizas()
-        elif opcion == '5':
+        elif opcion == '0':
             break
         else:
             print("Opción no válida. Intente de nuevo.")

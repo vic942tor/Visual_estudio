@@ -1,3 +1,6 @@
+"""
+Autores: Víctor Fernandez Díaz ~ Marcos Javier Pérez Gómez
+"""
 import os
 import csv
 import Utilidades
@@ -112,7 +115,7 @@ def menu():
         if opcion == '1':
             id_tomador = input("Ingrese ID del tomador (NIF, NIE, CIF): ")
             nombre_tomador = input("Ingrese nombre del tomador: ")
-            fecha_nacimiento = input("Ingrese fecha de nacimiento: ")
+            fecha_nacimiento = input("Ingrese fecha de nacimiento (YYYY-MM-DD): ")
             domicilio = input("Ingrese domicilio: ")
             movil_contacto = input("Ingrese número de contacto: ")
             email_contacto = input("Ingrese dirección de correo: ")

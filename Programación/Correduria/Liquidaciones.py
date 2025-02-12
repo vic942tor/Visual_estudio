@@ -1,3 +1,6 @@
+"""
+Autores: Víctor Fernandez Díaz ~ Marcos Javier Pérez Gómez
+"""
 import csv
 import os
 from datetime import datetime
@@ -75,20 +78,20 @@ def cerrar_liquidacion(nro_liquidacion, datos):
 def menu():
     datos = cargar_datos()
     while True:
-        print("\n--- Menú de Liquidaciones ---")
-        print("1. Generar Liquidación")
-        print("2. Cerrar Liquidación")
-        print("9. Salir")
+        print("""
+        Menú de Liquidaciones:
+        1. Generar Liquidación
+        2. Cerrar Liquidación
+        3. Modificar Recibo
+        0. Regresar al menú principal
+        """)
         opcion = input("Selecciona una opción: ")
         if opcion == "1":
             print(generar_liquidacion(datos))
         elif opcion == "2":
             nro_liquidacion = input("Ingrese el número de liquidación a cerrar: ")
             print(cerrar_liquidacion(nro_liquidacion, datos))
-        elif opcion == "9":
+        elif opcion == "0":
             break
         else:
             print("Opción no válida.")
-if __name__ == "__main__":
-    menu()
-

@@ -1,3 +1,6 @@
+"""
+Autores: Víctor Fernandez Díaz ~ Marcos Javier Pérez Gómez
+"""
 import os
 import csv
 
@@ -50,10 +53,10 @@ def crear_recibo():
                 "id_recibo": id_recibo,
                 "nro_poliza": input("Ingrese el número de póliza: "),
                 "fecha_inicio": input("Ingrese la fecha de inicio (YYYY-MM-DD): "),
-                "duracion": input("Ingrese la duración (A: Anual, S: Semestral, T: Trimestral, M: Mensual): "),
+                "duracion": input("Ingrese la duración (Anual, Semestral, Trimestral, Mensual): "),
                 "importe_cobrar": float(input("Ingrese el importe a cobrar: ")),
                 "fecha_cobro": input("Ingrese la fecha de cobro (YYYY-MM-DD): "),
-                "estado_recibo": input("Ingrese el estado del recibo (Pendiente, Pendiente_banco, Cobrado, Cobrado_banco, Baja): "),
+                "estado_recibo": input("Ingrese el estado del recibo (Pendiente, Cobrado, Baja): "),
                 "importe_pagar": float(input("Ingrese el importe a pagar: ")),
                 "estado_liquidacion": input("Ingrese el estado de liquidación (Pendiente, Liquidado): "),
                 "fecha_liquidacion": input("Ingrese la fecha de liquidación (YYYY-MM-DD): ")
@@ -129,6 +132,3 @@ def menu():
             break
         else:
             print("Opción no válida.")
-
-if __name__ == "__main__":
-    menu()
