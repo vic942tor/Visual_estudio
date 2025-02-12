@@ -1,25 +1,11 @@
-# Tomadores.py
-# Integrantes: [Nombre del Integrante 1], [Nombre del Integrante 2]
-# Este archivo contiene todas las funciones asociadas con el trabajo de los tomadores.
-
-# Estructura de datos para los tomadores
-# Tomadores: lista de diccionarios con los siguientes campos:
-# - id_tomador: identificador del tomador (NIF, NIE, CIF)
-# - nombre_tomador: nombre de la persona o empresa
-# - fecha_nacimiento: fecha de nacimiento (opcional)
-# - domicilio: domicilio del tomador
-# - movil_contacto: número de contacto
-# - email_contacto: dirección de correo de contacto
-
 import os
 import csv
 import Utilidades
 
-# Define the path for the CSV file
+# Define la ruta del archivo csv
 directorio_base = os.path.dirname(os.path.abspath(__file__))
 archivo_csv = os.path.join(directorio_base, "correduriadata.csv")
 
-# Initialize the list of tomadores
 tomadores = []
 
 def cargar_tomadores():
@@ -55,7 +41,7 @@ def agregar_tomador(id_tomador, nombre_tomador, fecha_nacimiento='', domicilio='
             'email_contacto': email_contacto
         }
         tomadores.append(tomador)
-        guardar_tomadores()  # Save to CSV after adding
+        guardar_tomadores()  # Guarda al csv
     else:
         print("ID de tomador no válido.")
 
@@ -75,7 +61,7 @@ def modificar_tomador(id_tomador, nombre_tomador=None, fecha_nacimiento=None, do
                 tomador['movil_contacto'] = movil_contacto
             if email_contacto is not None:
                 tomador['email_contacto'] = email_contacto
-            guardar_tomadores()  # Save to CSV after modifying
+            guardar_tomadores()  # Guarda al csv
             return
     print("Tomador no encontrado.")
 
@@ -85,7 +71,7 @@ def eliminar_tomador(id_tomador):
     """
     global tomadores
     tomadores = [t for t in tomadores if t['id_tomador'] != id_tomador]
-    guardar_tomadores()  # Save to CSV after deleting
+    guardar_tomadores()  # Guarda al csv
 
 def listar_tomadores():
     """
@@ -95,24 +81,24 @@ def listar_tomadores():
         print("No hay tomadores registrados.")
         return
 
-    # Print headers
     print("\nLista de Tomadores:")
-    print(f"{'ID Tomador':<15} {'Denominación':<30} {'Fecha Nacimiento':<15} {'Domicilio':<40} {'Móvil':<15} {'Email':<30}")
-    print("=" * 130)  # Separator line
+    print(f"{'ID Tomador':<15} {'Denominación':<30} {'Fecha Nacimiento':<15} {'Edad':<5} {'Domicilio':<40} {'Móvil':<15} {'Email':<30}")
+    print("=" * 130)
 
-    # Print each tomador in aligned format
+    # Muestra a los tomadores en una linea ordenada
     for tomador in tomadores:
-        print(f"{tomador['id_tomador']:<15} {tomador['nombre_tomador']:<30} {tomador['fecha_nacimiento']:<15} {tomador['domicilio']:<40} {tomador['movil_contacto']:<15} {tomador['email_contacto']:<30}")
+        edad = Utilidades.calcular_edad(tomador['fecha_nacimiento'])  # Calcular la edad
+        print(f"{tomador['id_tomador']:<15} {tomador['nombre_tomador']:<30} {tomador['fecha_nacimiento']:<15} {edad:<5} {tomador['domicilio']:<40} {tomador['movil_contacto']:<15} {tomador['email_contacto']:<30}")
 
-    print("=" * 130)  # Separator line
+    print("=" * 130)
 
 def menu():
     """
     Muestra el menú de opciones para gestionar tomadores.
     """
-    cargar_tomadores()  # Load tomadores from CSV at the start
+    cargar_tomadores()
     while True:
-        print("""
+        print(""" 
             Menú Tomadores:
             1. Agregar Tomador
             2. Modificar Tomador
