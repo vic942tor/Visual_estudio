@@ -31,7 +31,9 @@ def guardar_datos(datos):
     """
     if datos:
         with open(archivo_csv, "w", newline='', encoding='utf-8') as f:
-            writer = csv.DictWriter(f, fieldnames=datos[0].keys())
+            # Definir los nombres de los campos que se van a guardar
+            fieldnames = datos[0].keys()  # Usar las claves del primer diccionario como encabezados
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(datos)
 
@@ -65,17 +67,20 @@ def generar_liquidacion(datos):
 
     # Generar un nuevo número de liquidación
     nro_liquidacion = f"{datetime.now().year}-{len(datos) + 1:04d}"
+    
+    # Crear una lista de datos para la nueva liquidación
     nueva_liquidacion = {
         'nro_liquidacion': nro_liquidacion,
         'fecha_liquidacion': datetime.now().strftime("%Y-%m-%d"),
         'estado_liquidacion': 'Abierta',
         'importe_recibos_cobrados': importe_recibos_cobrados,
-        'lista_recibos_liquidar': lista_recibos_liquidar,
         'importe_recibos_baja': importe_recibos_baja,
-        'lista_recibos_baja': lista_recibos_baja,
         'importe_siniestros_pagados': importe_siniestros_pagados,
-        'lista_siniestros_liquidados': lista_siniestros_liquidados,
-        'importe_liquidacion': (importe_recibos_cobrados - importe_siniestros_pagados, importe_recibos_baja)
+        'importe_liquidacion': importe_recibos_cobrados - importe_siniestros_pagados,
+        # Convertir listas a cadenas para guardarlas en el CSV
+        'lista_recibos_liquidar': ', '.join([f"{poliza}-{recibo}" for poliza, recibo in lista_recibos_liquidar]),
+        'lista_recibos_baja': ', '.join([f"{poliza}-{recibo}" for poliza, recibo in lista_recibos_baja]),
+        'lista_siniestros_liquidados': ', '.join([f"{poliza}-{siniestro}" for poliza, siniestro in lista_siniestros_liquidados])
     }
 
     # Agregar la nueva liquidación a los datos
