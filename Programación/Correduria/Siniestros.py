@@ -20,8 +20,8 @@ def cargar_datos():
 # Guardar datos en el archivo CSV
 def guardar_datos(datos):
     with open(archivo_csv, mode='w', newline='', encoding='utf-8') as file:
-        nombre_campos = datos[0].keys()  # Obtener los nombres de los campos
-        escribir_csv = csv.DictWriter(file, nombre_campos=nombre_campos)
+        fieldnames = datos[0].keys()  # Obtener los nombres de los campos
+        escribir_csv = csv.DictWriter(file, fieldnames=fieldnames)
         escribir_csv.writeheader()
         escribir_csv.writerows(datos)
 

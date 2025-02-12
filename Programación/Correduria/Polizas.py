@@ -12,7 +12,7 @@ def cargar_polizas():
     polizas = []
     if os.path.exists(archivo_csv):
         with open(archivo_csv, mode='r', newline='', encoding='utf-8') as file:
-            lector_csv = csv.Dictlector_csv(file)
+            lector_csv = csv.DictReader(file)
             for fila in lector_csv:
                 if 'nro_poliza' in fila and 'id_tomador' in fila:
 #Convierte los datos del vehículo de cadena a tupla

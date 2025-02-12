@@ -66,8 +66,8 @@ def crear_recibo():
     
     # Guardar en el mismo archivo CSV
     with open(CSV_FILE, mode='w', newline='', encoding='utf-8') as file:
-        nombre_campos = datos[0].keys() if datos else [] 
-        escribir_csv = csv.DictWriter(file, nombre_campos=nombre_campos)
+        fieldnames = datos[0].keys() if datos else [] 
+        escribir_csv = csv.DictWriter(file, fieldnames=fieldnames)
         escribir_csv.writeheader()
         escribir_csv.writerows(datos)
     

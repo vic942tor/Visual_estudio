@@ -28,8 +28,8 @@ def guardar_datos(datos):
     if datos:
         with open(archivo_csv, "w", newline='', encoding='utf-8') as f:
 #Usa las claves del primer diccionario como encabezados
-            nombre_campos = datos[0].keys()  
-            escribir_csv = csv.DictWriter(f, nombre_campos=nombre_campos)
+            fieldnames = datos[0].keys()  
+            escribir_csv = csv.DictWriter(f, fieldnames=fieldnames)
             escribir_csv.writeheader()
             escribir_csv.writerows(datos)
 def mostrar_tomadores(datos):
