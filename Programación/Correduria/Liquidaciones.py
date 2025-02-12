@@ -2,7 +2,7 @@ import csv
 import os
 from datetime import datetime
 
-# Obtener el directorio base y construir la ruta del archivo CSV
+#Obtener el directorio base y construir la ruta del archivo .csv
 directorio_base = os.path.dirname(os.path.abspath(__file__))
 archivo_csv = os.path.join(directorio_base, "correduriadata.csv")
 
