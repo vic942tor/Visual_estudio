@@ -16,7 +16,8 @@ import csv
 import Utilidades
 
 # Define the path for the CSV file
-csv_ruta = os.path.join(os.getcwd(), 'C:\\Users\\omar icon\\Documents\\GitHub\\Visual_estudio\\Programación\\Correduria\\correduriadata.csv')
+directorio_base = os.path.dirname(os.path.abspath(__file__))
+archivo_csv = os.path.join(directorio_base, "correduriadata.csv")
 
 # Initialize the list of tomadores
 tomadores = []
@@ -25,8 +26,8 @@ def cargar_tomadores():
     """Cargar los tomadores desde el archivo CSV."""
     global tomadores
     tomadores = []
-    if os.path.exists(csv_ruta):
-        with open(csv_ruta, mode='r', newline='', encoding='utf-8') as file:
+    if os.path.exists(archivo_csv):
+        with open(archivo_csv, mode='r', newline='', encoding='utf-8') as file:
             lector_csv = csv.DictReader(file)
             for fila in lector_csv:
                 tomadores.append(fila)
@@ -35,7 +36,7 @@ def cargar_tomadores():
 
 def guardar_tomadores():
     """Guarda la lista de tomadores en el archivo CSV."""
-    with open(csv_ruta, mode='w', newline='', encoding='utf-8') as file:
+    with open(archivo_csv, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.DictWriter(file, fieldnames=tomadores[0].keys() if tomadores else [])
         writer.writeheader()
         writer.writerows(tomadores)
