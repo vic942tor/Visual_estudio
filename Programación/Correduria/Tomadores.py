@@ -11,26 +11,40 @@
 # - movil_contacto: número de contacto
 # - email_contacto: dirección de correo de contacto
 
+import os
+import csv
+import Utilidades
+
+# Define the path for the CSV file
+csv_ruta = os.path.join(os.getcwd(), 'C:\\Users\\omar icon\\Documents\\GitHub\\Visual_estudio\\Programación\\Correduria\\correduriadata.csv')
+
+# Initialize the list of tomadores
 tomadores = []
 
-def validar_id_tomador(id_tomador):
-    if len(id_tomador) == 9 and id_tomador[:-1].isdigit() and id_tomador[-1].isalpha():
-        return True
-    return False
+def cargar_tomadores():
+    """Cargar los tomadores desde el archivo CSV."""
+    global tomadores
+    tomadores = []
+    if os.path.exists(csv_ruta):
+        with open(csv_ruta, mode='r', newline='', encoding='utf-8') as file:
+            lector_csv = csv.DictReader(file)
+            for fila in lector_csv:
+                tomadores.append(fila)
+    else:
+        print("Error: El archivo de tomadores no existe.")
 
-def agregar_tomador(id_tomador, nombre_tomador, fecha_nacimiento, domicilio, movil_contacto, email_contacto):
+def guardar_tomadores():
+    """Guarda la lista de tomadores en el archivo CSV."""
+    with open(csv_ruta, mode='w', newline='', encoding='utf-8') as file:
+        writer = csv.DictWriter(file, fieldnames=tomadores[0].keys() if tomadores else [])
+        writer.writeheader()
+        writer.writerows(tomadores)
+
+def agregar_tomador(id_tomador, nombre_tomador, fecha_nacimiento='', domicilio='', movil_contacto='', email_contacto=''):
     """
-    Agrega un nuevo tomador a la lista de tomadores.
-    
-    :param id_tomador: str - Identificador del tomador
-    :param nombre_tomador: str - Nombre del tomador
-    :param fecha_nacimiento: str - Fecha de nacimiento del tomador
-    :param domicilio: str - Domicilio del tomador
-    :param movil_contacto: str - Número de contacto
-    :param email_contacto: str - Dirección de correo de contacto
-    :return: None
+    Agrega un nuevo tomador a la lista de tomadores y lo guarda en el archivo CSV.
     """
-    if validar_id_tomador(id_tomador):
+    if Utilidades.validar_nif_nie_cif(id_tomador):
         tomador = {
             'id_tomador': id_tomador,
             'nombre_tomador': nombre_tomador,
@@ -40,20 +54,13 @@ def agregar_tomador(id_tomador, nombre_tomador, fecha_nacimiento, domicilio, mov
             'email_contacto': email_contacto
         }
         tomadores.append(tomador)
+        guardar_tomadores()  # Save to CSV after adding
     else:
         print("ID de tomador no válido.")
 
 def modificar_tomador(id_tomador, nombre_tomador=None, fecha_nacimiento=None, domicilio=None, movil_contacto=None, email_contacto=None):
     """
     Modifica los datos de un tomador existente.
-    
-    :param id_tomador: str - Identificador del tomador
-    :param nombre_tomador: str - Nuevo nombre del tomador
-    :param fecha_nacimiento: str - Nueva fecha de nacimiento del tomador
-    :param domicilio: str - Nuevo domicilio del tomador
-    :param movil_contacto: str - Nuevo número de contacto
-    :param email_contacto: str - Nueva dirección de correo de contacto
-    :return: None
     """
     for tomador in tomadores:
         if tomador['id_tomador'] == id_tomador:
@@ -67,46 +74,42 @@ def modificar_tomador(id_tomador, nombre_tomador=None, fecha_nacimiento=None, do
                 tomador['movil_contacto'] = movil_contacto
             if email_contacto is not None:
                 tomador['email_contacto'] = email_contacto
+            guardar_tomadores()  # Save to CSV after modifying
             return
     print("Tomador no encontrado.")
 
 def eliminar_tomador(id_tomador):
     """
     Elimina un tomador de la lista de tomadores.
-    
-    :param id_tomador: str - Identificador del tomador
-    :return: None
     """
     global tomadores
-    tomadores = [tomador for tomador in tomadores if tomador['id_tomador'] != id_tomador]
+    tomadores = [t for t in tomadores if t['id_tomador'] != id_tomador]
+    guardar_tomadores()  # Save to CSV after deleting
 
 def listar_tomadores():
     """
     Lista todos los tomadores registrados.
-    
-    :return: None
     """
     if not tomadores:
         print("No hay tomadores registrados.")
         return
 
-    # Imprimir encabezados
+    # Print headers
     print("\nLista de Tomadores:")
     print(f"{'ID Tomador':<15} {'Denominación':<30} {'Fecha Nacimiento':<15} {'Domicilio':<40} {'Móvil':<15} {'Email':<30}")
-    print("=" * 130)  # Línea separadora
+    print("=" * 130)  # Separator line
 
-    # Imprimir cada tomador en formato alineado
+    # Print each tomador in aligned format
     for tomador in tomadores:
         print(f"{tomador['id_tomador']:<15} {tomador['nombre_tomador']:<30} {tomador['fecha_nacimiento']:<15} {tomador['domicilio']:<40} {tomador['movil_contacto']:<15} {tomador['email_contacto']:<30}")
 
-    print("=" * 130)  # Línea separadora al final
+    print("=" * 130)  # Separator line
 
 def menu():
     """
     Muestra el menú de opciones para gestionar tomadores.
-    
-    :return: None
     """
+    cargar_tomadores()  # Load tomadores from CSV at the start
     while True:
         print("""
             Menú Tomadores:
@@ -130,12 +133,12 @@ def menu():
         
         elif opcion == '2':
             id_tomador = input("Ingrese ID del tomador a modificar: ")
-            nombre_tomador = input("Ingrese nuevo nombre del tomador (dejar vacío para no modificar): ")
-            fecha_nacimiento = input("Ingrese nueva fecha de nacimiento (dejar vacío para no modificar): ")
-            domicilio = input("Ingrese nuevo domicilio (dejar vacío para no modificar): ")
-            movil_contacto = input("Ingrese nuevo número de contacto (dejar vacío para no modificar): ")
-            email_contacto = input("Ingrese nueva dirección de correo (dejar vacío para no modificar): ")
-            modificar_tomador(id_tomador, nombre_tomador or None, fecha_nacimiento or None, domicilio or None, movil_contacto or None, email_contacto or None)
+            nombre_tomador = input("Ingrese nuevo nombre del tomador (dejar vacío para no modificar): ") or None
+            fecha_nacimiento = input("Ingrese nueva fecha de nacimiento (dejar vacío para no modificar): ") or None
+            domicilio = input("Ingrese nuevo domicilio (dejar vacío para no modificar): ") or None
+            movil_contacto = input("Ingrese nuevo número de contacto (dejar vacío para no modificar): ") or None
+            email_contacto = input("Ingrese nueva dirección de correo (dejar vacío para no modificar): ") or None
+            modificar_tomador(id_tomador, nombre_tomador, fecha_nacimiento, domicilio, movil_contacto, email_contacto)
         
         elif opcion == '3':
             id_tomador = input("Ingrese ID del tomador a eliminar: ")
@@ -149,3 +152,6 @@ def menu():
         
         else:
             print("Opción no válida. Intente de nuevo.")
+
+if __name__ == "__main__":
+    menu()
