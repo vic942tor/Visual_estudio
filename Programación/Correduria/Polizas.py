@@ -39,8 +39,8 @@ def cargar_polizas():
 def guardar_polizas():
     """Guarda la lista de pólizas en el archivo CSV."""
     with open(archivo_csv, mode='w', newline='', encoding='utf-8') as file:
-        nombr_campos = polizas[0].keys() if polizas else []
-        escribir_csv = csv.DictWriter(file, nombr_campos=nombr_campos)
+        fieldnames = polizas[0].keys() if polizas else []
+        escribir_csv = csv.DictWriter(file, fieldnames=fieldnames)
         escribir_csv.writeheader()
         escribir_csv.writefilas(polizas)
 def crear_poliza():

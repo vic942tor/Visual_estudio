@@ -2,7 +2,7 @@ import csv
 import os
 from datetime import datetime
 
-#Obtener el directorio base y construir la ruta del archivo .csv
+#Obtiene el directorio base y construir la ruta del archivo .csv
 directorio_base = os.path.dirname(os.path.abspath(__file__))
 archivo_csv = os.path.join(directorio_base, "correduriadata.csv")
 def cargar_datos():
@@ -28,7 +28,7 @@ def guardar_datos(datos):
     """
     if datos:
         with open(archivo_csv, "w", newline='', encoding='utf-8') as f:
-            # Usa las claves del primer diccionario como encabezados
+#Usa las claves del primer diccionario como encabezados
             fieldnames = datos[0].keys()  
             escribir_csv = csv.DictWriter(f, fieldnames=fieldnames)
             escribir_csv.writeheader()
