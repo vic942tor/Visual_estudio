@@ -1,12 +1,12 @@
-
 import Polizas
 import Tomadores
 import Recibos
 import Siniestros
 import Liquidaciones
 import Estadisticas
+
 def main():
-    """Función que muestra el menú principal y gestiona las opciones seleccionadas."""
+    """Muestra el menú principal y gestiona las opciones seleccionadas."""
     while True:
         print("\nCorreduría Mi Coche Asegurado")
         print("1. Pólizas")
@@ -17,6 +17,7 @@ def main():
         print("6. Estadística")
         print("9. Salir")
         opcion = input("Seleccione una opción: ")
+#Llamada al módulo correspondiente según la opción elegida
         if opcion == '1':
             Polizas.menu()
         elif opcion == '2':
@@ -33,7 +34,9 @@ def main():
             print("Saliendo de la aplicación...")
             break
         else:
-            print("Opción no válida. Intente de nuevo.")
+            print("Opción no válida. Intente de nuevo.") 
+
 if __name__ == "__main__":
     main()
+
 
