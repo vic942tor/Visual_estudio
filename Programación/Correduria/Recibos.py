@@ -68,7 +68,7 @@ def crear_recibo():
     print("Recibo creado con éxito y almacenado en correduriadata.csv.")
 
 # Menú de recibos
-def menu_recibos(datos):
+def menu():
     """
     Muestra el menú de opciones de los recibos y permite interactuar con las opciones.
     """
