@@ -73,3 +73,28 @@ def es_cadena_valida(cadena):
         bool: True si es válida, False en caso contrario.
     """
     return bool(cadena and cadena.strip())
+
+def validar_matricula(matricula: str) -> bool:
+    """
+    Valida una matrícula de coche en formato español.
+    
+    Retorna:
+    bool: True si la matrícula es válida, False en caso contrario.
+    """    
+    # Comprobar que la matrícula tiene la longitud correcta
+    if len(matricula) != 7:
+        return False
+    
+    # Separar los componentes de la matrícula
+    numeros = matricula[:4]
+    letras = matricula[4:]
+    
+    # Validar que los primeros 4 caracteres son dígitos
+    if not numeros.isdigit():
+        return False
+    
+    # Validar que los últimos 3 caracteres son letras
+    if not letras.isalpha():
+        return False
+    
+    return True
