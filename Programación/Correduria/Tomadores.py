@@ -112,7 +112,7 @@ def menu():
         if opcion == '1':
             id_tomador = input("Ingrese ID del tomador (NIF, NIE, CIF): ")
             nombre_tomador = input("Ingrese nombre del tomador: ")
-            fecha_nacimiento = input("Ingrese fecha de nacimiento (opcional): ")
+            fecha_nacimiento = input("Ingrese fecha de nacimiento: ")
             domicilio = input("Ingrese domicilio: ")
             movil_contacto = input("Ingrese número de contacto: ")
             email_contacto = input("Ingrese dirección de correo: ")
