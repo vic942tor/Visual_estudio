@@ -32,7 +32,7 @@ def validar_tomador_existente(dni):
 # Crear un nuevo recibo
 def crear_recibo():
     """
-    Crea un nuevo recibo validando que el tomador exista en el CSV.
+    Crea un nuevo recibo validando que el tomador exista en el CSV y actualiza su línea correspondiente.
     """
     id_recibo = input("Ingrese el ID del recibo: ")
     dni = input("Ingrese el DNI del tomador: ")
@@ -41,51 +41,28 @@ def crear_recibo():
     if not validar_tomador_existente(dni):
         print("Error: El tomador indicado no existe. Por favor, crea un tomador antes de crear un recibo.")
         return
-    
-    # Duplicar datos del tomador si ya existe un recibo
-    tomador_existente = next((t for t in datos if t['id_tomador'] == dni), None)
 
-    nuevo_recibo = {
-        "id_recibo": id_recibo,
-        "nro_poliza": input("Ingrese el número de póliza: "),
-        "fecha_inicio": input("Ingrese la fecha de inicio (YYYY-MM-DD): "),
-        "duracion": input("Ingrese la duración (A: Anual, S: Semestral, T: Trimestral, M: Mensual): "),
-        "importe_cobrar": float(input("Ingrese el importe a cobrar: ")),
-        "fecha_cobro": input("Ingrese la fecha de cobro (YYYY-MM-DD): "),
-        "estado_recibo": input("Ingrese el estado del recibo (Pendiente, Pendiente_banco, Cobrado, Cobrado_banco, Baja): "),
-        "importe_pagar": float(input("Ingrese el importe a pagar: ")),
-        "estado_liquidacion": input("Ingrese el estado de liquidación (Pendiente, Liquidado): "),
-        "fecha_liquidacion": input("Ingrese la fecha de liquidación (YYYY-MM-DD): ")
-    }
+    # Buscar la línea exacta donde se encuentra el tomador en el CSV
+    for recibo in datos:
+        if recibo['id_tomador'] == dni:
+            # Actualizar solo los datos del recibo sin duplicar al tomador
+            recibo.update({
+                "id_recibo": id_recibo,
+                "nro_poliza": input("Ingrese el número de póliza: "),
+                "fecha_inicio": input("Ingrese la fecha de inicio (YYYY-MM-DD): "),
+                "duracion": input("Ingrese la duración (A: Anual, S: Semestral, T: Trimestral, M: Mensual): "),
+                "importe_cobrar": float(input("Ingrese el importe a cobrar: ")),
+                "fecha_cobro": input("Ingrese la fecha de cobro (YYYY-MM-DD): "),
+                "estado_recibo": input("Ingrese el estado del recibo (Pendiente, Pendiente_banco, Cobrado, Cobrado_banco, Baja): "),
+                "importe_pagar": float(input("Ingrese el importe a pagar: ")),
+                "estado_liquidacion": input("Ingrese el estado de liquidación (Pendiente, Liquidado): "),
+                "fecha_liquidacion": input("Ingrese la fecha de liquidación (YYYY-MM-DD): ")
+            })
+            break
 
-    # Duplicar datos del tomador en el nuevo recibo
-    if tomador_existente:
-        nuevo_recibo.update({
-            "id_tomador": tomador_existente['id_tomador'],
-            "nombre_tomador": tomador_existente['nombre_tomador'],
-            "fecha_nacimiento": tomador_existente['fecha_nacimiento'],
-            "domicilio": tomador_existente['domicilio'],
-            "movil_contacto": tomador_existente['movil_contacto'],
-            "email_contacto": tomador_existente['email_contacto']
-        })
-
-    # Validar que todos los campos requeridos no sean None
-    for key, value in nuevo_recibo.items():
-        if value is None or (isinstance(value, str) and value.strip() == ""):
-            print(f"Error: El campo {key} no puede estar vacío.")
-            return
-    
-    # Agregar el recibo a los datos en memoria
-    datos.append(nuevo_recibo)
-    
-    # Guardar en el mismo archivo CSV
-    with open(CSV_FILE, mode='w', newline='', encoding='utf-8') as file:
-        fieldnames = datos[0].keys() if datos else [] 
-        escribir_csv = csv.DictWriter(file, fieldnames=fieldnames)
-        escribir_csv.writeheader()
-        escribir_csv.writerows(datos)
-    
-    print("Recibo creado con éxito y almacenado en correduriadata.csv.")
+    # Guardar cambios en el CSV
+    guardar_datos()
+    print("Recibo actualizado correctamente.")
 
 # Modificar un recibo
 def modificar_recibo():
@@ -115,22 +92,19 @@ def guardar_datos():
 # Listar recibos
 def listar_recibos():
     """
-    Lista todos los recibos cargados desde el archivo CSV.
+    Lista solo los recibos que tienen un ID de recibo registrado.
     """
-    if not datos:
+    recibos_filtrados = [recibo for recibo in datos if recibo.get('id_recibo')]
+    if not recibos_filtrados:
         print("No hay recibos registrados.")
         return
+
     print("\nLista de Recibos:")
-    print(f"{'ID Recibo':<15} {'Número de Póliza':<20} {'Estado':<15}")
-    print("=" * 60)
-
-    # Muestra a los recibos en una línea ordenada
-    for recibo in datos:
-        print(f"{recibo['id_recibo']:<15} {recibo['nro_poliza']:<20} {recibo['estado_recibo']:<15}")
-
-    print("=" * 60)
-
-# Menú de recibos
+    print(f"{'ID Recibo':<15} {'DNI Tomador':<15} {'Número de Póliza':<20} {'Estado':<15}")
+    print("=" * 70)
+    for recibo in recibos_filtrados:
+        print(f"{recibo['id_recibo']:<15} {recibo['id_tomador']:<15} {recibo['nro_poliza']:<20} {recibo['estado_recibo']:<15}")
+    print("=" * 70)
 def menu():
     """
     Muestra el menú de opciones de los recibos y permite interactuar con las opciones.
