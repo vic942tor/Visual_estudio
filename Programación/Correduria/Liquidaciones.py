@@ -8,7 +8,8 @@ archivo_csv = os.path.join(directorio_base, "correduriadata.csv")
 def cargar_datos():
     """
     Carga los datos desde el archivo CSV y los devuelve en una lista de diccionarios.
-    Devuelve:
+    
+    Retorna:
         list: Lista de diccionarios con los datos cargados.
     """
     datos = []
@@ -16,7 +17,7 @@ def cargar_datos():
         with open(archivo_csv, newline='', encoding='utf-8') as f:
             lector_csv = csv.DictReader(f)
             datos = list(lector_csv)
-    except:
+    except FileNotFoundError:
         print("Error: Archivo de datos no encontrado.")
     return datos
 def guardar_datos(datos):
@@ -27,7 +28,7 @@ def guardar_datos(datos):
     """
     if datos:
         with open(archivo_csv, "w", newline='', encoding='utf-8') as f:
-#Usa las claves del primer diccionario como encabezados
+            # Usa las claves del primer diccionario como encabezados
             fieldnames = datos[0].keys()  
             escribir_csv = csv.DictWriter(f, fieldnames=fieldnames)
             escribir_csv.writeheader()
@@ -47,7 +48,7 @@ def generar_liquidacion(datos_recibos, datos_tomadores):
     Parámetros:
         datos_recibos (list): Lista de diccionarios con los datos de recibos.
         datos_tomadores (list): Lista de diccionarios con los datos de tomadores.
-    Devuelve:
+    Retorna:
         str: Mensaje de éxito con el número de liquidación generado.
     """
     mostrar_tomadores(datos_tomadores)
@@ -83,12 +84,19 @@ def generar_liquidacion(datos_recibos, datos_tomadores):
         'lista_recibos_liquidar': ', '.join([f"{poliza}-{recibo}" for poliza, recibo in lista_recibos_liquidar]),
         'lista_recibos_baja': ', '.join([f"{poliza}-{recibo}" for poliza, recibo in lista_recibos_baja]),
         'lista_siniestros_liquidados': ', '.join([f"{poliza}-{siniestro}" for poliza, siniestro in lista_siniestros_liquidados]),
-#Vincula la liquidación al tomador
-        'id_tomador': tomador_seleccionado['id_tomador'],  
+        'id_tomador': tomador_seleccionado['id_tomador'],
     }
+#Actualiza el estado del tomador en lugar de crear una nueva entrada
+    for tomador in datos_tomadores:
+        if tomador['id_tomador'] == tomador_seleccionado['id_tomador']:
+            tomador.update({
+                'estado_liquidacion': 'Abierta',
+                'nro_liquidacion': nro_liquidacion
+            })
 #Agrega la nueva liquidación a los datos
     datos_recibos.append(nueva_liquidacion)
     guardar_datos(datos_recibos)
+    guardar_datos(datos_tomadores)
     return f"Liquidación {nro_liquidacion} generada exitosamente para el tomador {tomador_seleccionado['nombre_tomador']}."
 def cerrar_liquidacion(nro_liquidacion, datos):
     """
@@ -96,7 +104,7 @@ def cerrar_liquidacion(nro_liquidacion, datos):
     Parámetros:
         nro_liquidacion (str): Número de la liquidación a cerrar.
         datos (list): Lista de diccionarios con los datos de liquidaciones.
-    Devuelve:
+    Retorna:
         str: Mensaje de éxito o error.
     """
     for liquidacion in datos:
@@ -112,7 +120,7 @@ def modificar_liquidacion(nro_liquidacion, nuevos_datos, datos):
         nro_liquidacion (str): Número de la liquidación a modificar.
         nuevos_datos (dict): Diccionario con los nuevos datos de la liquidación.
         datos (list): Lista de diccionarios con los datos de liquidaciones.
-    Devuelve:
+    Retorna:
         str: Mensaje de éxito o error.
     """
     for liquidacion in datos:
@@ -126,7 +134,7 @@ def menu():
     Muestra el menú de liquidaciones y gestiona las opciones seleccionadas.
     """
     datos_recibos = cargar_datos()
-#Carga lso datos de tomadores desde el mismo CSV
+#Carga los datos de tomadores desde el mismo CSV
     datos_tomadores = cargar_datos()  
     while True:
         print("\n--- Menú de Liquidaciones ---")
