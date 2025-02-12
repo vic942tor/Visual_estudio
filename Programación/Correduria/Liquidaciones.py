@@ -101,7 +101,7 @@ def cerrar_liquidacion(nro_liquidacion, datos):
             return f"Liquidación {nro_liquidacion} cerrada exitosamente."
     return "Error: Liquidación no encontrada."
 
-def menu_liquidaciones():
+def menu():
     """
     Muestra el menú de liquidaciones y gestiona las opciones seleccionadas.
     """
