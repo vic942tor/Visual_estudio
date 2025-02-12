@@ -1,48 +1,50 @@
 import csv
 import os
-from Utilidades import validar_nif_nie_cif
+from Utilidades import validar_nif_nie_cif 
 
-#Obtiene el directorio base y construir la ruta del archivo CSV
+#Obtiene el directorio base y construye la ruta del archivo CSV donde se almacenan las pólizas
 directorio_base = os.path.dirname(os.path.abspath(__file__))
 archivo_csv = os.path.join(directorio_base, "correduriadata.csv")
-polizas = []
+polizas = []  
 def cargar_polizas():
-    """Carga las pólizas desde el archivo CSV."""
+    """Carga las pólizas desde el archivo CSV si existe."""
     global polizas
     polizas = []
     if os.path.exists(archivo_csv):
         with open(archivo_csv, mode='r', newline='', encoding='utf-8') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                if 'nro_poliza' in row and 'id_tomador' in row:
-                    datos_vehiculo = row.get('datos_vehiculo', None)
+            lector_csv = csv.Dictlector_csv(file)
+            for fila in lector_csv:
+                if 'nro_poliza' in fila and 'id_tomador' in fila:
+#Convierte los datos del vehículo de cadena a tupla
+                    datos_vehiculo = fila.get('datos_vehiculo', None)
                     if datos_vehiculo:
                         datos_vehiculo = tuple(datos_vehiculo.strip("()").split(","))
                     else:
                         datos_vehiculo = ()
+#Crea el diccionario de la póliza y lo agrega a la lista
                     poliza = {
-                        'nro_poliza': row['nro_poliza'],
-                        'id_tomador': row['id_tomador'],
-                        'matricula': row['matricula'],
+                        'nro_poliza': fila['nro_poliza'],
+                        'id_tomador': fila['id_tomador'],
+                        'matricula': fila['matricula'],
                         'datos_vehiculo': datos_vehiculo,
-                        'cobertura': row['cobertura'],
-                        'id_conductor': row['id_conductor'],
-                        'estado_poliza': row['estado_poliza'],
-                        'fecha_emision': row['fecha_emision'],
-                        'forma_pago': row['forma_pago']
+                        'cobertura': fila['cobertura'],
+                        'id_conductor': fila['id_conductor'],
+                        'estado_poliza': fila['estado_poliza'],
+                        'fecha_emision': fila['fecha_emision'],
+                        'forma_pago': fila['forma_pago']
                     }
                     polizas.append(poliza)
     else:
         print("Error: El archivo de pólizas no existe.")
 def guardar_polizas():
-    """Guarda las pólizas en el archivo CSV."""
+    """Guarda la lista de pólizas en el archivo CSV."""
     with open(archivo_csv, mode='w', newline='', encoding='utf-8') as file:
-        fieldnames = polizas[0].keys() if polizas else []
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(polizas)
+        nombr_campos = polizas[0].keys() if polizas else []
+        escribir_csv = csv.DictWriter(file, nombr_campos=nombr_campos)
+        escribir_csv.writeheader()
+        escribir_csv.writefilas(polizas)
 def crear_poliza():
-    """Crea una nueva póliza."""
+    """Solicita datos al usuario y crea una nueva póliza."""
     nro_poliza = input("Ingrese el número de póliza: ")
     if any(p['nro_poliza'] == nro_poliza for p in polizas):
         print("Error: La póliza ya existe.")
@@ -51,25 +53,26 @@ def crear_poliza():
     if not validar_nif_nie_cif(id_tomador):
         print("Error: ID del tomador no válido.")
         return
+#Se solicita la información del vehículo
     matricula = input("Ingrese la matrícula del vehículo: ")
     tipo_vehiculo = input("Ingrese el tipo de vehículo (Ciclomotor, Moto, Turismo, Furgoneta, Camión): ")
     marca = input("Ingrese la marca del vehículo: ")
     modelo = input("Ingrese el modelo del vehículo: ")
     funcionamiento = input("Ingrese el funcionamiento (Combustión, Eléctrico, Mixto): ")
-    # Cobertura
+#Se define la cobertura
     cobertura = input("Ingrese la cobertura (RC, RL, INC, RB, TR, o 'normal' para RC): ")
     if cobertura == 'normal':
         cobertura = 'RC'
-    # Datos del conductor
+#Datos del conductor
     nif_conductor = input("Ingrese el NIF/NIE del conductor: ")
     fecha_nacimiento_conductor = input("Ingrese la fecha de nacimiento del conductor (YYYY-MM-DD): ")
     tipo_carnet = input("Ingrese el tipo de carnet: ")
     fecha_carnet = input("Ingrese la fecha de emisión del carnet (YYYY-MM-DD): ")
-
+#Datos adicionales de la póliza
     estado_poliza = input("Ingrese el estado de la póliza (Cobrada, PteCobro, Baja): ")
     fecha_emision = input("Ingrese la fecha de emisión (YYYY-MM-DD): ")
     forma_pago = input("Ingrese la forma de pago (Efectivo o Banco): ")
-    # Crear la póliza
+#Se almacena la nueva póliza en la lista
     poliza = {
         'nro_poliza': nro_poliza,
         'id_tomador': id_tomador,
@@ -85,11 +88,12 @@ def crear_poliza():
     guardar_polizas()
     print("Póliza creada exitosamente.")
 def modificar_poliza():
-    """Modifica una póliza existente."""
+    """Permite modificar los datos de una póliza existente."""
     nro_poliza = input("Ingrese el número de póliza a modificar: ")
     for poliza in polizas:
         if poliza['nro_poliza'] == nro_poliza:
             print("Póliza encontrada:", poliza)
+#Se actualizan los valores de la póliza con la nueva información ingresada
             poliza['id_tomador'] = input("Ingrese el nuevo ID del tomador: ")
             poliza['matricula'] = input("Ingrese la nueva matrícula del vehículo: ")
             poliza['datos_vehiculo'] = (
@@ -113,23 +117,17 @@ def modificar_poliza():
             return
     print("Póliza no encontrada.")
 def eliminar_poliza():
-    """Elimina una póliza existente."""
+    """Elimina una póliza del sistema."""
     nro_poliza = input("Ingrese el número de póliza a eliminar: ")
     global polizas
     polizas = [p for p in polizas if p['nro_poliza'] != nro_poliza]
     guardar_polizas()
     print("Póliza eliminada exitosamente.")
 def listar_polizas():
-    """
-    Muestra todas las pólizas registradas en la correduría.
-    
-    Parámetros: Ninguno
-    Retorna: Ninguno
-    """
+    """Muestra todas las pólizas almacenadas."""
     if not polizas:
         print("No hay pólizas registradas.")
         return
-
     print("\nLista de Pólizas:")
     for poliza in polizas:
         print(f"Número de Póliza: {poliza['nro_poliza']}, "
@@ -139,7 +137,7 @@ def listar_polizas():
               f"Fecha de Emisión: {poliza['fecha_emision']}, "
               f"Forma de Pago: {poliza['forma_pago']}")
 def menu():
-    """Función que muestra el menú de pólizas y gestiona las opciones seleccionadas."""
+    """Muestra el menú de gestión de pólizas y permite interactuar con las opciones."""
     cargar_polizas()
     while True:
         print("\nMenú de Pólizas")
@@ -148,16 +146,16 @@ def menu():
         print("3. Eliminar Póliza")
         print("4. Listar Pólizas")
         print("5. Regresar al menú principal")
-        option = input("Seleccione una opción: ")
-        if option == '1':
+        opcion = input("Seleccione una opción: ")
+        if opcion == '1':
             crear_poliza()
-        elif option == '2':
+        elif opcion == '2':
             modificar_poliza()
-        elif option == '3':
+        elif opcion == '3':
             eliminar_poliza()
-        elif option == '4':
+        elif opcion == '4':
             listar_polizas()
-        elif option == '5':
+        elif opcion == '5':
             break
         else:
             print("Opción no válida. Intente de nuevo.")

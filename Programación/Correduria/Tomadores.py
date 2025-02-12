@@ -5,7 +5,7 @@
 # Estructura de datos para los tomadores
 # Tomadores: lista de diccionarios con los siguientes campos:
 # - id_tomador: identificador del tomador (NIF, NIE, CIF)
-# - denominacion: nombre de la persona o empresa
+# - nombre_tomador: nombre de la persona o empresa
 # - fecha_nacimiento: fecha de nacimiento (opcional)
 # - domicilio: domicilio del tomador
 # - movil_contacto: número de contacto
@@ -18,12 +18,12 @@ def validar_id_tomador(id_tomador):
         return True
     return False
 
-def agregar_tomador(id_tomador, denominacion, fecha_nacimiento, domicilio, movil_contacto, email_contacto):
+def agregar_tomador(id_tomador, nombre_tomador, fecha_nacimiento, domicilio, movil_contacto, email_contacto):
     """
     Agrega un nuevo tomador a la lista de tomadores.
     
     :param id_tomador: str - Identificador del tomador
-    :param denominacion: str - Nombre del tomador
+    :param nombre_tomador: str - Nombre del tomador
     :param fecha_nacimiento: str - Fecha de nacimiento del tomador
     :param domicilio: str - Domicilio del tomador
     :param movil_contacto: str - Número de contacto
@@ -33,7 +33,7 @@ def agregar_tomador(id_tomador, denominacion, fecha_nacimiento, domicilio, movil
     if validar_id_tomador(id_tomador):
         tomador = {
             'id_tomador': id_tomador,
-            'denominacion': denominacion,
+            'nombre_tomador': nombre_tomador,
             'fecha_nacimiento': fecha_nacimiento,
             'domicilio': domicilio,
             'movil_contacto': movil_contacto,
@@ -43,12 +43,12 @@ def agregar_tomador(id_tomador, denominacion, fecha_nacimiento, domicilio, movil
     else:
         print("ID de tomador no válido.")
 
-def modificar_tomador(id_tomador, denominacion=None, fecha_nacimiento=None, domicilio=None, movil_contacto=None, email_contacto=None):
+def modificar_tomador(id_tomador, nombre_tomador=None, fecha_nacimiento=None, domicilio=None, movil_contacto=None, email_contacto=None):
     """
     Modifica los datos de un tomador existente.
     
     :param id_tomador: str - Identificador del tomador
-    :param denominacion: str - Nuevo nombre del tomador
+    :param nombre_tomador: str - Nuevo nombre del tomador
     :param fecha_nacimiento: str - Nueva fecha de nacimiento del tomador
     :param domicilio: str - Nuevo domicilio del tomador
     :param movil_contacto: str - Nuevo número de contacto
@@ -57,8 +57,8 @@ def modificar_tomador(id_tomador, denominacion=None, fecha_nacimiento=None, domi
     """
     for tomador in tomadores:
         if tomador['id_tomador'] == id_tomador:
-            if denominacion is not None:
-                tomador['denominacion'] = denominacion
+            if nombre_tomador is not None:
+                tomador['nombre_tomador'] = nombre_tomador
             if fecha_nacimiento is not None:
                 tomador['fecha_nacimiento'] = fecha_nacimiento
             if domicilio is not None:
@@ -97,7 +97,7 @@ def listar_tomadores():
 
     # Imprimir cada tomador en formato alineado
     for tomador in tomadores:
-        print(f"{tomador['id_tomador']:<15} {tomador['denominacion']:<30} {tomador['fecha_nacimiento']:<15} {tomador['domicilio']:<40} {tomador['movil_contacto']:<15} {tomador['email_contacto']:<30}")
+        print(f"{tomador['id_tomador']:<15} {tomador['nombre_tomador']:<30} {tomador['fecha_nacimiento']:<15} {tomador['domicilio']:<40} {tomador['movil_contacto']:<15} {tomador['email_contacto']:<30}")
 
     print("=" * 130)  # Línea separadora al final
 
@@ -121,21 +121,21 @@ def menu():
         
         if opcion == '1':
             id_tomador = input("Ingrese ID del tomador (NIF, NIE, CIF): ")
-            denominacion = input("Ingrese nombre del tomador: ")
+            nombre_tomador = input("Ingrese nombre del tomador: ")
             fecha_nacimiento = input("Ingrese fecha de nacimiento (opcional): ")
             domicilio = input("Ingrese domicilio: ")
             movil_contacto = input("Ingrese número de contacto: ")
             email_contacto = input("Ingrese dirección de correo: ")
-            agregar_tomador(id_tomador, denominacion, fecha_nacimiento, domicilio, movil_contacto, email_contacto)
+            agregar_tomador(id_tomador, nombre_tomador, fecha_nacimiento, domicilio, movil_contacto, email_contacto)
         
         elif opcion == '2':
             id_tomador = input("Ingrese ID del tomador a modificar: ")
-            denominacion = input("Ingrese nuevo nombre del tomador (dejar vacío para no modificar): ")
+            nombre_tomador = input("Ingrese nuevo nombre del tomador (dejar vacío para no modificar): ")
             fecha_nacimiento = input("Ingrese nueva fecha de nacimiento (dejar vacío para no modificar): ")
             domicilio = input("Ingrese nuevo domicilio (dejar vacío para no modificar): ")
             movil_contacto = input("Ingrese nuevo número de contacto (dejar vacío para no modificar): ")
             email_contacto = input("Ingrese nueva dirección de correo (dejar vacío para no modificar): ")
-            modificar_tomador(id_tomador, denominacion or None, fecha_nacimiento or None, domicilio or None, movil_contacto or None, email_contacto or None)
+            modificar_tomador(id_tomador, nombre_tomador or None, fecha_nacimiento or None, domicilio or None, movil_contacto or None, email_contacto or None)
         
         elif opcion == '3':
             id_tomador = input("Ingrese ID del tomador a eliminar: ")

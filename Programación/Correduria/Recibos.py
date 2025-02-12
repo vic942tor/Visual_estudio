@@ -12,8 +12,8 @@ def cargar_datos():
     datos = []
     try:
         with open(CSV_FILE, mode='r', encoding='utf-8') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
+            leer_csv = csv.DictReader(file)
+            for row in leer_csv:
                 datos.append(row)
     except FileNotFoundError:
         print("Error: Archivo de datos no encontrado.")
@@ -66,10 +66,10 @@ def crear_recibo():
     
     # Guardar en el mismo archivo CSV
     with open(CSV_FILE, mode='w', newline='', encoding='utf-8') as file:
-        fieldnames = datos[0].keys() if datos else []  # Asegúrate de que fieldnames no esté vacío
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(datos)
+        nombre_campos = datos[0].keys() if datos else [] 
+        escribir_csv = csv.DictWriter(file, nombre_campos=nombre_campos)
+        escribir_csv.writeheader()
+        escribir_csv.writerows(datos)
     
     print("Recibo creado con éxito y almacenado en correduriadata.csv.")
 

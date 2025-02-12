@@ -7,10 +7,8 @@ Autores: [Nombre1, Nombre2]
 def validar_nif_nie_cif(identificador):
     """
     Valida un NIF, NIE o CIF según el formato español.
-    
     validador:
         identificador (str): Cadena a validar.
-
     devuelve:
         bool: True si es válido, False en caso contrario.
     """
@@ -26,10 +24,8 @@ def validar_nif_nie_cif(identificador):
 def validar_cuenta_bancaria(cuenta):
     """
     Valida una cuenta bancaria según el formato IBAN.
-
     validador:
         cuenta (str): IBAN a validar.
-
     devuelve:
         bool: True si es válida, False en caso contrario.
     """
@@ -40,11 +36,9 @@ def validar_cuenta_bancaria(cuenta):
 def validar_fecha(fecha, formato="%Y-%m-%d"):
     """
     Valida una fecha según un formato dado.
-
     validador:
         fecha (str): Fecha en formato de cadena.
         formato (str): Formato esperado de la fecha (por defecto "%Y-%m-%d").
-
     devuelve:
         bool: True si la fecha es válida, False en caso contrario.
     """
@@ -58,10 +52,8 @@ def validar_fecha(fecha, formato="%Y-%m-%d"):
 def calcular_edad(fecha_nacimiento):
     """
     Calcula la edad de una persona a partir de su fecha de nacimiento.
-
     validador:
         fecha_nacimiento (str): Fecha de nacimiento en formato "YYYY-MM-DD".
-
     devuelve:
         int: Edad calculada o -1 si la fecha no es válida.
     """
@@ -75,10 +67,8 @@ def calcular_edad(fecha_nacimiento):
 def es_cadena_valida(cadena):
     """
     Verifica si una cadena no está vacía y no contiene solo espacios en blanco.
-
     validador:
         cadena (str): Cadena a validar.
-
     devuelve:
         bool: True si es válida, False en caso contrario.
     """

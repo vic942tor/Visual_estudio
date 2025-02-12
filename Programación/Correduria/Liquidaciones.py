@@ -14,9 +14,9 @@ def cargar_datos():
     datos = []
     try:
         with open(archivo_csv, newline='', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            datos = list(reader)
-    except FileNotFoundError:
+            lector_csv = csv.DictReader(f)
+            datos = list(lector_csv)
+    except:
         print("Error: Archivo de datos no encontrado.")
     return datos
 def guardar_datos(datos):
@@ -28,10 +28,10 @@ def guardar_datos(datos):
     if datos:
         with open(archivo_csv, "w", newline='', encoding='utf-8') as f:
 #Usa las claves del primer diccionario como encabezados
-            fieldnames = datos[0].keys()  
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
-            writer.writeheader()
-            writer.writerows(datos)
+            nombre_campos = datos[0].keys()  
+            escribir_csv = csv.DictWriter(f, nombre_campos=nombre_campos)
+            escribir_csv.writeheader()
+            escribir_csv.writerows(datos)
 def mostrar_tomadores(datos):
     """
     Muestra la lista de tomadores disponibles.
@@ -40,8 +40,7 @@ def mostrar_tomadores(datos):
     """
     print("\n--- Lista de Tomadores ---")
     for i, tomador in enumerate(datos):
-        print(f"{i + 1}. {tomador['id_tomador']} - {tomador['denominacion']}")
-
+        print(f"{i + 1}. {tomador['id_tomador']} - {tomador['nombre_tomador']}")
 def generar_liquidacion(datos_recibos, datos_tomadores):
     """
     Genera una nueva liquidación basada en los recibos y siniestros.
@@ -84,12 +83,13 @@ def generar_liquidacion(datos_recibos, datos_tomadores):
         'lista_recibos_liquidar': ', '.join([f"{poliza}-{recibo}" for poliza, recibo in lista_recibos_liquidar]),
         'lista_recibos_baja': ', '.join([f"{poliza}-{recibo}" for poliza, recibo in lista_recibos_baja]),
         'lista_siniestros_liquidados': ', '.join([f"{poliza}-{siniestro}" for poliza, siniestro in lista_siniestros_liquidados]),
-        'id_tomador': tomador_seleccionado['id_tomador'],  # Vincular la liquidación al tomador
+#Vincula la liquidación al tomador
+        'id_tomador': tomador_seleccionado['id_tomador'],  
     }
 #Agrega la nueva liquidación a los datos
     datos_recibos.append(nueva_liquidacion)
     guardar_datos(datos_recibos)
-    return f"Liquidación {nro_liquidacion} generada exitosamente para el tomador {tomador_seleccionado['denominacion']}."
+    return f"Liquidación {nro_liquidacion} generada exitosamente para el tomador {tomador_seleccionado['nombre_tomador']}."
 def cerrar_liquidacion(nro_liquidacion, datos):
     """
     Cierra una liquidación existente.

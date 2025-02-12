@@ -10,8 +10,8 @@ def cargar_datos():
     datos = []
     try:
         with open(archivo_csv, mode='r', encoding='utf-8') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
+            leer_csv = csv.DictReader(file)
+            for row in leer_csv:
                 datos.append(row)
     except FileNotFoundError:
         print("Error: Archivo de datos no encontrado.")
@@ -20,10 +20,10 @@ def cargar_datos():
 # Guardar datos en el archivo CSV
 def guardar_datos(datos):
     with open(archivo_csv, mode='w', newline='', encoding='utf-8') as file:
-        fieldnames = datos[0].keys()  # Obtener los nombres de los campos
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(datos)
+        nombre_campos = datos[0].keys()  # Obtener los nombres de los campos
+        escribir_csv = csv.DictWriter(file, nombre_campos=nombre_campos)
+        escribir_csv.writeheader()
+        escribir_csv.writerows(datos)
 
 # Crear un nuevo siniestro
 def crear_siniestro(datos):

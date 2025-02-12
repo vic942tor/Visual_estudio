@@ -12,8 +12,8 @@ def cargar_datos():
     datos = []
     try:
         with open(archivo_csv, newline='', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            datos = list(reader)
+            leer_csv = csv.DictReader(f)
+            datos = list(leer_csv)
     except FileNotFoundError:
         print(f"Error: Archivo {archivo_csv} no encontrado.")
     return datos
