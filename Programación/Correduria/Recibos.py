@@ -1,39 +1,47 @@
-# Recibos.py
-import Polizas  # Para verificar que la póliza existe
+import os
+import csv
 
-# Lista global de recibos
-recibos = []
+directorio_base = os.path.dirname(os.path.abspath(__file__))
+CSV_FILE = os.path.join(directorio_base, "correduriadata.csv")
 
+# Cargar datos desde el archivo CSV
+def cargar_datos():
+    """
+    Carga los datos desde el archivo CSV y los devuelve en una lista de diccionarios.
+    """
+    datos = []
+    try:
+        with open(CSV_FILE, mode='r', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                datos.append(row)
+    except FileNotFoundError:
+        print("Error: Archivo de datos no encontrado.")
+    return datos
+
+# Lista de datos cargados desde el CSV
+datos = cargar_datos()
+
+# Validar si una póliza existe
 def validar_poliza_existente(nro_poliza):
     """
-    Valida que la póliza exista en el sistema.
-    Parametros:
-    nro_poliza (str): El número de póliza a verificar.
-    
-    Retorna:
-    bool: True si la póliza existe, False si no.
+    Verifica si el número de póliza existe en los datos cargados desde el CSV.
     """
-    return any(p['nro_poliza'] == nro_poliza for p in Polizas.polizas)
+    return any(p['nro_poliza'] == nro_poliza for p in datos)
 
+# Crear un nuevo recibo
 def crear_recibo():
     """
-    Crea un nuevo recibo.
+    Crea un nuevo recibo validando que la póliza exista en el CSV.
     """
     id_recibo = input("Ingrese el ID del recibo: ")
-    
-    # Verificar que el recibo no exista
-    if any(r['id_recibo'] == id_recibo for r in recibos):
-        print("El recibo con este ID ya existe.")
-        return
-
     nro_poliza = input("Ingrese el número de póliza: ")
 
-    # Verificar que la póliza exista
+    # Validar la existencia de la póliza
     if not validar_poliza_existente(nro_poliza):
-        print("La póliza indicada no existe.")
+        print("Error: La póliza indicada no existe en la base de datos.")
         return
-
-    # Solicitar y crear el nuevo recibo
+    
     nuevo_recibo = {
         "id_recibo": id_recibo,
         "nro_poliza": nro_poliza,
@@ -46,74 +54,35 @@ def crear_recibo():
         "estado_liquidacion": input("Ingrese el estado de liquidación (Pendiente, Liquidado): "),
         "fecha_liquidacion": input("Ingrese la fecha de liquidación (YYYY-MM-DD): ")
     }
-
-    recibos.append(nuevo_recibo)
-    print("Recibo creado con éxito.")
-
-def modificar_recibo():
-    """
-    Modifica los datos de un recibo existente, excepto el ID del recibo.
-    """
-    id_recibo = input("Ingrese el ID del recibo a modificar: ")
     
-    # Buscar el recibo
-    recibo = next((r for r in recibos if r['id_recibo'] == id_recibo), None)
+    # Agregar el recibo a los datos en memoria
+    datos.append(nuevo_recibo)
     
-    if recibo:
-        # Modificar los campos directamente
-        campo = input(f"Recibo actual: {recibo}\n¿Qué campo desea modificar? "
-            "(fecha_inicio, duracion, importe_cobrar, fecha_cobro, estado_recibo, importe_pagar, estado_liquidacion, fecha_liquidacion): ")
-        
-        if campo in recibo:
-            nuevo_valor = input(f"Ingrese el nuevo valor para {campo}: ")
-            if campo in ["importe_cobrar", "importe_pagar"]:
-                nuevo_valor = float(nuevo_valor)
-            recibo[campo] = nuevo_valor
-            print(f"Recibo modificado: {recibo}")
-        else:
-            print("Campo no válido.")
-    else:
-        print("El recibo con ese ID no existe.")
+    # Guardar en el mismo archivo CSV
+    with open(CSV_FILE, mode='w', newline='', encoding='utf-8') as file:
+        fieldnames = datos[0].keys()
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(datos)
+    
+    print("Recibo creado con éxito y almacenado en correduriadata.csv.")
 
-def eliminar_recibo():
-    """
-    Elimina un recibo que no esté en estado Pendiente o Cobrado.
-    """
-    id_recibo = input("Ingrese el ID del recibo a eliminar: ")
-
-    # Buscar y eliminar el recibo si cumple las condiciones
-    recibo = next((r for r in recibos if r['id_recibo'] == id_recibo), None)
-
-    if recibo and recibo['estado_recibo'] not in ['Pendiente', 'Cobrado']:
-        recibos.remove(recibo)
-        print("Recibo eliminado con éxito.")
-    else:
-        print("No se puede eliminar el recibo o no existe.")
-
+# Menú de recibos
 def menu_recibos(datos):
     """
     Muestra el menú de opciones de los recibos y permite interactuar con las opciones.
     """
-    opciones = {
-        '1': crear_recibo,
-        '2': modificar_recibo,
-        '3': eliminar_recibo,
-        '9': lambda: None  # Regresar al menú principal
-    }
-    
     while True:
         print("""
         Menú Recibos:
         1. Crear Recibo
-        2. Modificar Recibo
-        3. Eliminar Recibo
         9. Regresar al menú principal
         """)
         opcion = input("Seleccione una opción: ")
         
-        if opcion in opciones:
-            if opcion == '9':
-                break
-            opciones[opcion]()
+        if opcion == '1':
+            crear_recibo()
+        elif opcion == '9':
+            break
         else:
             print("Opción no válida.")
