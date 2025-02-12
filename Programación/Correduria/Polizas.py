@@ -37,25 +37,69 @@ def cargar_polizas():
     else:
         print("Error: El archivo de pólizas no existe.")
 def guardar_polizas():
-    """Guarda la lista de pólizas en el archivo CSV."""
+    """Guarda las pólizas en correduriadata.csv actualizando la fila del tomador en lugar de duplicarla."""
+    if not os.path.exists(archivo_csv):
+        print("Error: El archivo correduriadata.csv no existe.")
+        return
+#Carga el contenido actual del CSV
+    with open(archivo_csv, mode='r', newline='', encoding='utf-8') as file:
+        lector_csv = csv.DictReader(file)
+        fieldnames = lector_csv.fieldnames
+        filas_existentes = list(lector_csv)
+#Crea un diccionario de pólizas basado en nro_poliza
+    polizas_dict = {p['nro_poliza']: p for p in polizas}
+    nuevas_filas = []
+    for fila in filas_existentes:
+        id_tomador = fila.get('id_tomador')
+        if id_tomador and any(p['id_tomador'] == id_tomador for p in polizas):
+            for poliza in polizas:
+                if poliza['id_tomador'] == id_tomador:
+                    fila.update(poliza)
+        nuevas_filas.append(fila)  
+#Guarda de vuelta sin perder información
     with open(archivo_csv, mode='w', newline='', encoding='utf-8') as file:
-        fieldnames = polizas[0].keys() if polizas else []
         escribir_csv = csv.DictWriter(file, fieldnames=fieldnames)
         escribir_csv.writeheader()
-        escribir_csv.writerows(polizas)
+        escribir_csv.writerows(nuevas_filas)
+    print("Pólizas actualizadas correctamente.")
+def seleccionar_tomador():
+    """Permite seleccionar un tomador existente desde correduriadata.csv"""
+    if not os.path.exists(archivo_csv):
+        print("Error: El archivo correduriadata.csv no existe.")
+        return None 
+#Carga tomadores desde el CSV
+    with open(archivo_csv, mode='r', newline='', encoding='utf-8') as file:
+        lector_csv = csv.DictReader(file)
+        tomadores = list(lector_csv)
+    if not tomadores:
+        print("No hay tomadores registrados en correduriadata.csv.")
+        return None
+#Muestra lista de tomadores para selección
+    print("\nLista de Tomadores Registrados:")
+    for i, tomador in enumerate(tomadores, start=1):
+        print(f"{i}. {tomador['id_tomador']} - {tomador['nombre_tomador']}")
+#Selecciona tomador por número de lista
+    while True:
+        try:
+            seleccion = int(input("\nSeleccione el número del tomador para asociarle una póliza: "))
+            if 1 <= seleccion <= len(tomadores):
+                return tomadores[seleccion - 1]['id_tomador']
+            else:
+                print("Número fuera de rango. Intente de nuevo.")
+        except ValueError:
+            print("Entrada inválida. Ingrese un número válido.")
 def crear_poliza():
-    """Solicita datos al usuario y crea una nueva póliza."""
+    """Crea una póliza vinculada a un tomador existente sin duplicar su fila en correduriadata.csv."""
+    id_tomador = seleccionar_tomador()
+    if not id_tomador:
+        print("Operación cancelada. No se seleccionó un tomador válido.")
+        return
     nro_poliza = input("Ingrese el número de póliza: ")
 #Verifica si la póliza ya existe
     if any(p['nro_poliza'] == nro_poliza for p in polizas):
         print("Error: La póliza ya existe.")
         return
-#Solicita el ID del tomador
-    id_tomador = input("Ingrese el ID del tomador (NIF/NIE/CIF): ")
-    if not validar_nif_nie_cif(id_tomador):
-        print("Error: ID del tomador no válido.")
-        return
-#Solicita la información del vehículo
+#Solicita datos del vehículo
     matricula = input("Ingrese la matrícula del vehículo: ")
     tipo_vehiculo = input("Ingrese el tipo de vehículo (Ciclomotor, Moto, Turismo, Furgoneta, Camión): ")
     marca = input("Ingrese la marca del vehículo: ")
@@ -74,7 +118,7 @@ def crear_poliza():
     estado_poliza = input("Ingrese el estado de la póliza (Cobrada, PteCobro, Baja): ")
     fecha_emision = input("Ingrese la fecha de emisión (YYYY-MM-DD): ")
     forma_pago = input("Ingrese la forma de pago (Efectivo o Banco): ")
-#Se almacena la nueva póliza en la lista
+#Se almacena la nueva póliza en la lista de pólizas
     poliza = {
         'nro_poliza': nro_poliza,
         'id_tomador': id_tomador,
@@ -86,11 +130,11 @@ def crear_poliza():
         'fecha_emision': fecha_emision,
         'forma_pago': forma_pago
     }
-#Añade la nueva póliza a la lista existente
+#Si la póliza pertenece a un tomador existente, actualizamos la lista de pólizas
     polizas.append(poliza)
-#Guarda todas las pólizas, incluyendo la nueva
+#Guarda pólizas sin duplicar la fila del tomador
     guardar_polizas()
-    print("Póliza creada exitosamente.")
+    print(f"Póliza creada y vinculada correctamente para el tomador {id_tomador}.")
 def modificar_poliza():
     """Permite modificar los datos de una póliza existente."""
     nro_poliza = input("Ingrese el número de póliza a modificar: ")

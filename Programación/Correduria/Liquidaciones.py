@@ -76,7 +76,7 @@ def generar_liquidacion(datos_recibos, datos_tomadores):
     nueva_liquidacion = {
         'nro_liquidacion': nro_liquidacion,
         'fecha_liquidacion': datetime.now().strftime("%Y-%m-%d"),
-        'estado_liquidacion': 'Abierta',
+        'estado_liquidacion': 'Pendiente',
         'importe_recibos_cobrados': importe_recibos_cobrados,
         'importe_recibos_baja': importe_recibos_baja,
         'importe_siniestros_pagados': importe_siniestros_pagados,
@@ -90,7 +90,7 @@ def generar_liquidacion(datos_recibos, datos_tomadores):
     for tomador in datos_tomadores:
         if tomador['id_tomador'] == tomador_seleccionado['id_tomador']:
             tomador.update({
-                'estado_liquidacion': 'Abierta',
+                'estado_liquidacion': 'Pendiente',
                 'nro_liquidacion': nro_liquidacion
             })
 #Agrega la nueva liquidación a los datos
@@ -109,9 +109,9 @@ def cerrar_liquidacion(nro_liquidacion, datos):
     """
     for liquidacion in datos:
         if liquidacion['nro_liquidacion'] == nro_liquidacion:
-            liquidacion['estado_liquidacion'] = 'Cerrada'
+            liquidacion['estado_liquidacion'] = 'Liquidado'
             guardar_datos(datos)
-            return f"Liquidación {nro_liquidacion} cerrada exitosamente."
+            return f"Liquidación {nro_liquidacion} Liquidado exitosamente."
     return "Error: Liquidación no encontrada."
 def modificar_liquidacion(nro_liquidacion, nuevos_datos, datos):
     """
@@ -151,7 +151,7 @@ def menu():
         elif opcion == "3":
             nro_liquidacion = input("Ingrese el número de liquidación a modificar: ")
             nuevos_datos = {}
-            nuevos_datos['estado_liquidacion'] = input("Ingrese el nuevo estado de la liquidación (Abierta/Cerrada): ")
+            nuevos_datos['estado_liquidacion'] = input("Ingrese el nuevo estado de la liquidación (Pendiente/Liquidado): ")
             print(modificar_liquidacion(nro_liquidacion, nuevos_datos, datos_recibos))
         elif opcion == "9":
             break
