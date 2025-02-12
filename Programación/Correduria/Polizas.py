@@ -12,7 +12,7 @@ def cargar_polizas():
     polizas = []
     if os.path.exists(archivo_csv):
         with open(archivo_csv, mode='r', newline='', encoding='utf-8') as file:
-            lector_csv = csv.Dictlector_csv(file)
+            lector_csv = csv.DictReader(file)
             for fila in lector_csv:
                 if 'nro_poliza' in fila and 'id_tomador' in fila:
 #Convierte los datos del vehículo de cadena a tupla
@@ -39,8 +39,8 @@ def cargar_polizas():
 def guardar_polizas():
     """Guarda la lista de pólizas en el archivo CSV."""
     with open(archivo_csv, mode='w', newline='', encoding='utf-8') as file:
-        nombr_campos = polizas[0].keys() if polizas else []
-        escribir_csv = csv.DictWriter(file, nombr_campos=nombr_campos)
+        fieldnames = polizas[0].keys() if polizas else []
+        escribir_csv = csv.DictWriter(file, fieldnames=fieldnames)
         escribir_csv.writeheader()
         escribir_csv.writefilas(polizas)
 def crear_poliza():
