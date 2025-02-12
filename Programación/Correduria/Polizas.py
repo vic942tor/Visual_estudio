@@ -42,7 +42,7 @@ def guardar_polizas():
         fieldnames = polizas[0].keys() if polizas else []
         escribir_csv = csv.DictWriter(file, fieldnames=fieldnames)
         escribir_csv.writeheader()
-        escribir_csv.writefilas(polizas)
+        escribir_csv.writerows(polizas)
 def crear_poliza():
     """Solicita datos al usuario y crea una nueva póliza."""
     nro_poliza = input("Ingrese el número de póliza: ")
