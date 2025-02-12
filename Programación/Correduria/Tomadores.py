@@ -14,14 +14,9 @@
 tomadores = []
 
 def validar_id_tomador(id_tomador):
-    """
-    Valida el formato del id_tomador (NIF, NIE, CIF).
-    
-    :param id_tomador: str - Identificador del tomador
-    :return: bool - True si es válido, False en caso contrario
-    """
-    # Implementar validación según el formato correspondiente
-    pass
+    if len(id_tomador) == 9 and id_tomador[:-1].isdigit() and id_tomador[-1].isalpha():
+        return True
+    return False
 
 def agregar_tomador(id_tomador, denominacion, fecha_nacimiento, domicilio, movil_contacto, email_contacto):
     """
@@ -91,8 +86,20 @@ def listar_tomadores():
     
     :return: None
     """
+    if not tomadores:
+        print("No hay tomadores registrados.")
+        return
+
+    # Imprimir encabezados
+    print("\nLista de Tomadores:")
+    print(f"{'ID Tomador':<15} {'Denominación':<30} {'Fecha Nacimiento':<15} {'Domicilio':<40} {'Móvil':<15} {'Email':<30}")
+    print("=" * 130)  # Línea separadora
+
+    # Imprimir cada tomador en formato alineado
     for tomador in tomadores:
-        print(tomador)
+        print(f"{tomador['id_tomador']:<15} {tomador['denominacion']:<30} {tomador['fecha_nacimiento']:<15} {tomador['domicilio']:<40} {tomador['movil_contacto']:<15} {tomador['email_contacto']:<30}")
+
+    print("=" * 130)  # Línea separadora al final
 
 def menu():
     """
