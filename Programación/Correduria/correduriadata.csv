@@ -1,1 +1,5 @@
 nro_poliza,id_tomador,matricula,datos_vehiculo,cobertura,id_conductor,estado_poliza,fecha_emision,forma_pago
+P12345,12345678A,ABC123,(),RC,87654321B,Cobrada,2024-01-01,Efectivo
+,79087535B,,(),,,,,
+P7908,79087535B,7894AB,"('Turismo', 'Toyota', 'Corolla', 'Eléctrico')",RC,"('79087535B', '2003-01-08', 'B2', '2003-01-08')",COBRADA,2003-01-09,Efectivo
+P790875,79087535B,ABC124,"('Turismo', 'Toyota', 'Corolla', 'Eléctrico')",RC,"('79087535B', '2003-01-08', 'B2', '2003-01-08')",Cobrada,2003-01-08,Efectivo

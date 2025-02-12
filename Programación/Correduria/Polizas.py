@@ -46,20 +46,22 @@ def guardar_polizas():
 def crear_poliza():
     """Solicita datos al usuario y crea una nueva póliza."""
     nro_poliza = input("Ingrese el número de póliza: ")
+#Verifica si la póliza ya existe
     if any(p['nro_poliza'] == nro_poliza for p in polizas):
         print("Error: La póliza ya existe.")
         return
+#Solicita el ID del tomador
     id_tomador = input("Ingrese el ID del tomador (NIF/NIE/CIF): ")
     if not validar_nif_nie_cif(id_tomador):
         print("Error: ID del tomador no válido.")
         return
-#Se solicita la información del vehículo
+#Solicita la información del vehículo
     matricula = input("Ingrese la matrícula del vehículo: ")
     tipo_vehiculo = input("Ingrese el tipo de vehículo (Ciclomotor, Moto, Turismo, Furgoneta, Camión): ")
     marca = input("Ingrese la marca del vehículo: ")
     modelo = input("Ingrese el modelo del vehículo: ")
     funcionamiento = input("Ingrese el funcionamiento (Combustión, Eléctrico, Mixto): ")
-#Se define la cobertura
+#Define la cobertura
     cobertura = input("Ingrese la cobertura (RC, RL, INC, RB, TR, o 'normal' para RC): ")
     if cobertura == 'normal':
         cobertura = 'RC'
@@ -84,7 +86,9 @@ def crear_poliza():
         'fecha_emision': fecha_emision,
         'forma_pago': forma_pago
     }
+#Añade la nueva póliza a la lista existente
     polizas.append(poliza)
+#Guarda todas las pólizas, incluyendo la nueva
     guardar_polizas()
     print("Póliza creada exitosamente.")
 def modificar_poliza():
@@ -93,25 +97,48 @@ def modificar_poliza():
     for poliza in polizas:
         if poliza['nro_poliza'] == nro_poliza:
             print("Póliza encontrada:", poliza)
-#Se actualizan los valores de la póliza con la nueva información ingresada
-            poliza['id_tomador'] = input("Ingrese el nuevo ID del tomador: ")
-            poliza['matricula'] = input("Ingrese la nueva matrícula del vehículo: ")
-            poliza['datos_vehiculo'] = (
-                input("Ingrese el nuevo tipo de vehículo: "),
-                input("Ingrese la nueva marca del vehículo: "),
-                input("Ingrese el nuevo modelo del vehículo: "),
-                input("Ingrese el nuevo funcionamiento: ")
-            )
-            poliza['cobertura'] = input("Ingrese la nueva cobertura: ")
-            poliza['id_conductor'] = (
-                input("Ingrese el nuevo NIF/NIE del conductor: "),
-                input("Ingrese la nueva fecha de nacimiento del conductor: "),
-                input("Ingrese el nuevo tipo de carnet: "),
-                input("Ingrese la nueva fecha de emisión del carnet: ")
-            )
-            poliza['estado_poliza'] = input("Ingrese el nuevo estado de la póliza: ")
-            poliza['fecha_emision'] = input("Ingrese la nueva fecha de emisión: ")
-            poliza['forma_pago'] = input("Ingrese la nueva forma de pago: ")
+            while True:
+                print("\nCampos disponibles para modificar:")
+                print("1. ID Tomador")
+                print("2. Matrícula")
+                print("3. Datos del Vehículo")
+                print("4. Cobertura")
+                print("5. ID Conductor")
+                print("6. Estado de la Póliza")
+                print("7. Fecha de Emisión")
+                print("8. Forma de Pago")
+                print("0. Salir")
+                opcion_modificar = input("Seleccione el campo a modificar (0 para salir): ")
+                if opcion_modificar == '1':
+                    poliza['id_tomador'] = input("Ingrese el nuevo ID del tomador: ")
+                elif opcion_modificar == '2':
+                    poliza['matricula'] = input("Ingrese la nueva matrícula del vehículo: ")
+                elif opcion_modificar == '3':
+                    poliza['datos_vehiculo'] = (
+                        input("Ingrese el nuevo tipo de vehículo: "),
+                        input("Ingrese la nueva marca del vehículo: "),
+                        input("Ingrese el nuevo modelo del vehículo: "),
+                        input("Ingrese el nuevo funcionamiento: ")
+                    )
+                elif opcion_modificar == '4':
+                    poliza['cobertura'] = input("Ingrese la nueva cobertura: ")
+                elif opcion_modificar == '5':
+                    poliza['id_conductor'] = (
+                        input("Ingrese el nuevo NIF/NIE del conductor: "),
+                        input("Ingrese la nueva fecha de nacimiento del conductor: "),
+                        input("Ingrese el nuevo tipo de carnet: "),
+                        input("Ingrese la nueva fecha de emisión del carnet: ")
+                    )
+                elif opcion_modificar == '6':
+                    poliza['estado_poliza'] = input("Ingrese el nuevo estado de la póliza: ")
+                elif opcion_modificar == '7':
+                    poliza['fecha_emision'] = input("Ingrese la nueva fecha de emisión: ")
+                elif opcion_modificar == '8':
+                    poliza['forma_pago'] = input("Ingrese la nueva forma de pago: ")
+                elif opcion_modificar == '0':
+                    break
+                else:
+                    print("Opción no válida. Intente de nuevo.")
             guardar_polizas()
             print("Póliza modificada exitosamente.")
             return
