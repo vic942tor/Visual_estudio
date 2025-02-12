@@ -109,18 +109,19 @@ def listar_siniestros(datos):
 
 # Cargar datos al inicio
 datos = cargar_datos()
-
 def menu():
     """
     Muestra el menú de opciones para la gestión de siniestros.
     """
     while True:
-        print("Menú de Siniestros")
-        print("1. Crear un siniestro")
-        print("2. Modificar un siniestro")
-        print("3. Eliminar un siniestro")
-        print("4. Listar siniestros")
-        print("5. Volver al menú principal")
+        print("""
+        Menú de Siniestro:
+        1. Crear un siniestro
+        2. Modificar un siniestro
+        3. Eliminar un siniestro
+        4. Listar siniestros
+        0. Volver al menú principal
+        """)
         
         opcion = input("Seleccione una opción: ")
         
@@ -132,7 +133,7 @@ def menu():
             eliminar_siniestro(datos)
         elif opcion == '4':
             listar_siniestros(datos)
-        elif opcion == '5':
+        elif opcion == '0':
             break
         else:
             print("Opción no válida. Intente de nuevo.")

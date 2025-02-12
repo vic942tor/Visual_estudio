@@ -55,17 +55,35 @@ def crear_recibo():
         "fecha_liquidacion": input("Ingrese la fecha de liquidación (YYYY-MM-DD): ")
     }
     
+    # Validar que todos los campos requeridos no sean None
+    for key, value in nuevo_recibo.items():
+        if value is None or (isinstance(value, str) and value.strip() == ""):
+            print(f"Error: El campo {key} no puede estar vacío.")
+            return
+    
     # Agregar el recibo a los datos en memoria
     datos.append(nuevo_recibo)
     
     # Guardar en el mismo archivo CSV
     with open(CSV_FILE, mode='w', newline='', encoding='utf-8') as file:
-        fieldnames = datos[0].keys()
+        fieldnames = datos[0].keys() if datos else []  # Asegúrate de que fieldnames no esté vacío
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(datos)
     
     print("Recibo creado con éxito y almacenado en correduriadata.csv.")
+
+# Listar recibos
+def listar_recibos():
+    """
+    Lista todos los recibos cargados desde el archivo CSV.
+    """
+    if not datos:
+        print("No hay recibos registrados.")
+        return
+    print("\nLista de Recibos:")
+    for recibo in datos:
+        print(f"ID Recibo: {recibo['id_recibo']}, Número de Póliza: {recibo['nro_poliza']}, Estado: {recibo['estado_recibo']}")
 
 # Menú de recibos
 def menu():
@@ -76,13 +94,16 @@ def menu():
         print("""
         Menú Recibos:
         1. Crear Recibo
-        9. Regresar al menú principal
+        2. Listar Recibos
+        0. Regresar al menú principal
         """)
         opcion = input("Seleccione una opción: ")
         
         if opcion == '1':
             crear_recibo()
-        elif opcion == '9':
+        elif opcion == '2':
+            listar_recibos()
+        elif opcion == '0':
             break
         else:
             print("Opción no válida.")
