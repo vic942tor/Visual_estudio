@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interacción con Fresas 🍓</title>
+    <style>
+        body {
+            background-image: url('./fresas©iStock.jpg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            text-align: center;
+        }
+        h2, h3 {
+            color: #d63384;
+        }
+        .container {
+            background: white; 
+            width: 50%;
+            margin: auto; 
+            padding: 20px; 
+            border-radius: 15px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            text-align: center;
+            
+        }
+        p {
+            background: #ffebf1;
+            border: 1px solid #d63384;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #d63384;
+            width: 80%;
+            margin: 10px auto;
+        }
+        button {
+            background-color: #d63384;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #b32b6c;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #d63384;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🍓 Propiedades de las Fresas 🍓</h2>
+        <p id="objetoApr"></p>
+        <p id="objetoBpr"></p>
+        <button id="botondoble">Añadir</button>
+
+        <h3>🍓 Modificar Fresa 🍓</h3>
+        <input type="text" id="param1" placeholder="Madurez (true/false)">
+        <input type="text" id="param2" placeholder="Bichada (true/false)">
+        <button onclick="updateObjectProperties()">Actualizar 🔄</button>
+    </div>
+
+    <script>
+        class Fresa {
+            constructor(madura, bichada) {
+                this.madura = madura;
+                this.bichada = bichada;
+                this.estado = `La fresa está ${madura ? 'madura 🍎' : 'verde 🍏'} y ${bichada ? 'tiene bichos 🪱' : 'está limpia ⭐'}`;
+            }
+
+            modificarPropiedades(nuevaMadurez, nuevaBichada) {
+                this.madura = nuevaMadurez === "true";
+                this.bichada = nuevaBichada === "true";
+                this.estado = `La fresa está ${this.madura ? 'madura 🍎' : 'verde 🍏'} y ${this.bichada ? 'tiene bichos 🪱' : 'está limpia ⭐'}`;
+            }
+
+            mostrarPropiedades() {
+                return JSON.stringify(this, null, 2).slice(1, -1);
+            }
+        }
+
+        let objA = new Fresa(true, false);
+        let objB = new Fresa(false, true);
+
+        function actualizarVista() {
+            document.getElementById("objetoApr").innerText = objA.mostrarPropiedades();
+            document.getElementById("objetoBpr").innerText = objB.mostrarPropiedades();
+        }
+
+        actualizarVista();
+
+        let botondoble = document.getElementById("botondoble");
+        let isPropertyAdded = false;
+
+        botondoble.addEventListener("click", function() {
+            if (isPropertyAdded) {
+                delete objA.extra;
+                delete objB.extra;
+                botondoble.innerText = "Añadir";
+            } else {
+                objA.extra = "Nueva cosecha";
+                objB.extra = "Cosecha antigua";
+                botondoble.innerText = "Eliminar";
+            }
+            isPropertyAdded = !isPropertyAdded;
+            actualizarVista();
+        });
+
+        function updateObjectProperties() {
+            let param1 = document.getElementById("param1").value;
+            let param2 = document.getElementById("param2").value;
+
+            if (param1 && param2) {
+                objA.modificarPropiedades(param1, param2);
+                actualizarVista();
+            }
+        }
+    </script>
+</body>
+</html>
+
+

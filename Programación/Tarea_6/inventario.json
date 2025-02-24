@@ -1,0 +1,27 @@
+[
+    {
+        "id_producto": 1,
+        "nombre": "Portatil",
+        "precio": 1200.5,
+        "stock": 10,
+        "garantia": 24,
+        "__class__": "Electronico"
+    },
+    {
+        "id_producto": 2,
+        "nombre": "Camiseta",
+        "precio": 25.99,
+        "stock": 50,
+        "talla": "M",
+        "material": "Algodon",
+        "__class__": "Ropa"
+    },
+    {
+        "id_producto": 3,
+        "nombre": "Leche",
+        "precio": 1.5,
+        "stock": 30,
+        "fecha_expiracion": "2025-03-10",
+        "__class__": "Comida"
+    }
+]

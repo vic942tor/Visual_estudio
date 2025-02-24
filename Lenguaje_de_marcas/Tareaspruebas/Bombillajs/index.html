@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./bombillas.css">
+    <title>Bombilla Toggle</title>
+</head>
+<body class="Centrado">
+    <div>
+        <img src="./pic_bulboff.gif" id="bombilla">
+        <br><br>
+        <button id="botoncambiante" onclick="toggleBombilla()">Encender</button>
+    </div>
+
+    <script>
+        function toggleBombilla() {
+            let bombilla = document.getElementById("bombilla");
+            let boton = document.getElementById("botoncambiante");
+
+            if (bombilla.src.includes("pic_bulboff.gif")) {
+                bombilla.src = "./pic_bulbon.gif";
+                boton.textContent = "Apagar";
+            } else {
+                bombilla.src = "./pic_bulboff.gif";
+                boton.textContent = "Encender";
+            }
+        }
+    </script>
+</body>
+</html>
